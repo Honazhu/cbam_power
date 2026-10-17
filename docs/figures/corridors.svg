@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Five formal corridors and their Italian destination zones</title>
+  <desc id="desc">Austria, Switzerland and Slovenia map to Italy North. Greece maps to Italy South. Montenegro maps to Italy Centre South. Austria and Greece form the frozen Montenegro synthetic donor pool. Arrows represent the analysis sign convention, not measured trade or a geographic network map.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7991a2"/></marker>
+    <marker id="focusArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#167d8d"/></marker>
+  </defs>
+  <rect width="1000" height="560" rx="14" fill="#f7f9fb"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="34" y="40" fill="#18354a" font-size="24" font-weight="700">From country-level origins to Italian bidding zones</text>
+    <text x="34" y="69" fill="#607583" font-size="16">Schematic assignments · arrows show positive net flow into Italy</text>
+    <text x="64" y="106" fill="#607583" font-size="14" letter-spacing="1.5">ORIGIN</text>
+    <text x="660" y="106" fill="#607583" font-size="14" letter-spacing="1.5">DESTINATION</text>
+    <g fill="#fff" stroke="#bdccd6" stroke-width="1.4">
+      <rect x="58" y="124" width="278" height="58" rx="8"/>
+      <rect x="58" y="201" width="278" height="58" rx="8"/>
+      <rect x="58" y="278" width="278" height="58" rx="8"/>
+      <rect x="58" y="355" width="278" height="58" rx="8"/>
+      <rect x="644" y="188" width="292" height="84" rx="8"/>
+      <rect x="644" y="351" width="292" height="66" rx="8"/>
+    </g>
+    <rect x="58" y="432" width="278" height="62" rx="8" fill="#e4f2f2" stroke="#167d8d" stroke-width="1.8"/>
+    <rect x="644" y="432" width="292" height="62" rx="8" fill="#e4f2f2" stroke="#167d8d" stroke-width="1.8"/>
+    <g fill="none" stroke="#7991a2" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M336 153H459Q480 153 480 174V212Q480 230 502 230H634"/>
+      <path d="M336 230H634"/>
+      <path d="M336 307H459Q480 307 480 285V250Q480 230 502 230H634"/>
+      <path d="M336 384H634"/>
+    </g>
+    <path d="M336 463H634" fill="none" stroke="#167d8d" stroke-width="3" marker-end="url(#focusArrow)"/>
+    <g fill="#18354a" font-size="22" font-weight="700">
+      <text x="78" y="161">AT</text><text x="78" y="238">CH</text><text x="78" y="315">SI</text>
+      <text x="78" y="392">GR</text><text x="78" y="471" fill="#116a78">ME</text>
+    </g>
+    <g fill="#37576f" font-size="19">
+      <text x="130" y="161">Austria</text><text x="130" y="238">Switzerland</text><text x="130" y="315">Slovenia</text>
+      <text x="130" y="392">Greece</text><text x="130" y="471" fill="#116a78">Montenegro</text>
+    </g>
+    <g fill="#edf3f7" stroke="#c0d0db">
+      <rect x="247" y="137" width="75" height="30" rx="15"/>
+      <rect x="247" y="368" width="75" height="30" rx="15"/>
+    </g>
+    <g fill="#4b6578" font-size="13" text-anchor="middle"><text x="284.5" y="157">donor</text><text x="284.5" y="388">donor</text></g>
+    <g text-anchor="middle">
+      <text x="790" y="224" fill="#18354a" font-size="22" font-weight="700">IT-NORD</text>
+      <text x="790" y="251" fill="#607583" font-size="16">Northern Italy zone</text>
+      <text x="790" y="380" fill="#18354a" font-size="22" font-weight="700">IT-SUD</text>
+      <text x="790" y="402" fill="#607583" font-size="16">Southern Italy zone</text>
+      <text x="790" y="461" fill="#116a78" font-size="22" font-weight="700">IT-CSUD</text>
+      <text x="790" y="483" fill="#155f6c" font-size="16">Centre-South Italy zone</text>
+    </g>
+    <text x="58" y="531" fill="#607583" font-size="15">Donor tags identify membership only. No frozen weight, capacity or empirical flow is shown.</text>
+  </g>
+</svg>

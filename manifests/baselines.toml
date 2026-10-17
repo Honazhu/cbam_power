@@ -1,0 +1,2148 @@
+# PR1 frozen contract. No private data or personal absolute paths.
+"registry_version" = "PR1_BASELINES_1"
+"scope" = "Immutable authorized local PR1 baseline registry, not a public data bundle or full replication PASS"
+"input_root_env" = "CBAM_INPUT_ROOT"
+"baseline_subdirectory" = "baselines"
+"output_root_env" = "CBAM_OUTPUT_ROOT"
+"default_output_location" = "sibling runs directory of CBAM_INPUT_ROOT; outside input root and candidate tree"
+"expected_update_policy" = "No update mode; intentional scientific changes require separate review, never generated from new estimates"
+"public_rights" = "UNVERIFIED; candidate source/config only, all baseline payloads PRIVATE_ONLY"
+"schema_policy" = "CSV headers/row counts and keys checked; JSON top-level structure checked; NPZ NPY headers/payload dimensions and all references checked; Parquet bytes/hash bound to registration-time inspected schema"
+"covariance_identity" = ["legacy_file_path", "covariance_key", "ordered_parameter_columns"]
+"numerical_reestimation_this_phase" = false
+
+[validation]
+
+[validation.file_integrity]
+"comparison" = "SHA256 exact"
+"reserialized_output_bytes" = "not required to equal legacy bytes"
+"update_expected_from_new_run" = false
+
+
+[validation.sample_identity]
+"comparison" = "exact UTC timestamps and model/sample keys before numerical comparison"
+"fields" = ["model_id", "sorted_timestamp_utc_ns", "N", "pre_N", "post_N", "year_N", "start", "end", "missing_mask", "kernel_weights", "FE_reference", "design_columns"]
+"legacy_unit" = "us"
+"canonical_unit" = "ns"
+"integer_encoding" = "signed int64 little endian ordered UTC epoch values"
+"translation_rule" = "Both hashes must be independently reproduced from actual timestamps, whose sorted values and missing sets are equal. Hash strings alone cannot establish encoding equivalence."
+"actual_timestamp_proof_required" = true
+"missing_proof_status" = "UNVERIFIED_SAMPLE_IDENTITY"
+"future_membership_reconstruction" = "PR5; PR1 pins panel, synthetic data, catalogs and membership evidence without estimating"
+
+
+[validation.full_frozen]
+"atol" = 1e-06
+"rtol" = 1e-08
+"equal_nan" = true
+"nan_mask_must_match" = true
+"applies_to" = ["V2F all coefficients/covariances", "V3 all coefficients/covariances", "V3.2 P2/P3 all beta/covariance"]
+"source" = "v3_formal_cbam/src/validation.py::validate_full_frozen_outputs"
+"extension_status" = "V3 and P2/P3 upper bounds adopted and frozen by PR1 per plan Section 3.2; not a claim of executed replication"
+
+
+[validation.primary_internal]
+"atol" = 1e-10
+"rtol" = 0.0
+"source" = "v3_formal_cbam/src/validation.py::validate_results"
+
+
+[validation.core_panel]
+"atol" = 1e-08
+"rtol" = 1e-11
+"nan_mask_must_match" = true
+"source" = "v3_formal_cbam/src/data_processing.py::reconstruct_core"
+
+
+[validation.weather]
+"strict_abs_less_than" = 1e-09
+"nan_mask_must_match" = true
+"source" = "v3_formal_cbam/src/reused/weather_audit.py"
+
+
+[validation.frozen_weights_csv_json]
+"atol" = 1e-15
+"rtol" = 0.0
+"source" = "v3_formal_cbam/v3_1_final_patch/src/synthetic_method_summary.py"
+
+
+[validation.polynomial_p1_parent_tau_se]
+"atol" = 1e-08
+"rtol" = 1e-10
+"source" = "v3_formal_cbam/v3_2_polynomial_rdit/src/estimate.py::baseline_check"
+
+
+[validation.polynomial_p1_all_coefficients]
+"strict_abs_less_than" = 1e-07
+"transformation" = "z^k coefficient / h^k to r^k; covariance transformed by the same diagonal linear map"
+"source" = "v3_formal_cbam/v3_2_polynomial_rdit/src/estimate.py::baseline_check"
+
+
+[validation.model_status]
+"comparison" = "exact ID/status/reason/flags, including not estimated records"
+"do_not_replace" = ["BLOCKED", "NOT_RUN", "UNSUPPORTED", "INSUFFICIENT_PRE_SUPPORT"]
+"skip_missing_baseline" = false
+
+
+[validation.reporting]
+"rule" = "trace displayed numbers, curves and bins to formal model IDs, coefficients/covariances and authorized source data; rounding at display only"
+"presentation_reestimation_allowed" = false
+"image_pixel_identity_required" = false
+"rounded_headline_tolerance_is_not_full_equivalence" = true
+
+
+
+[[files]]
+"id" = "v3_panel"
+"legacy_source" = "v3_formal_cbam/data/processed/v3_hourly_panel.parquet"
+"private_relative_path" = "baselines/v3_formal_cbam/data/processed/v3_hourly_panel.parquet"
+"sha256" = "a0eea50d8ac966fa9833eadc91d33e2f8f3f07c09bb1c025a5d79ed57bddc305"
+"bytes" = 6865098
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "RESTRICTED_OR_UNVERIFIED_DERIVED_PRICES"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "parquet"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 118795
+"columns" = ["timestamp_utc", "timestamp_local", "corridor_id", "scheduled_export_proxy", "commercial_net_MW", "physical_net_MW", "physical_export_proxy", "commercial_net_MWh", "origin_price", "destination_price", "raw_price_spread", "spread_center", "spread_c", "year", "month", "hour", "weekday", "italian_zone", "destination_bidding_zone", "origin_bidding_zone", "spread_center_source", "data_status", "day", "week", "N_commercial", "Y_positive", "Y_signed", "S_native", "Post", "r_days", "delivery_interval_minutes", "origin_weather_temp_c", "origin_weather_wind_ms", "origin_weather_ssrd_processed", "origin_weather_tp_processed", "destination_weather_temp_c", "destination_weather_wind_ms", "destination_weather_ssrd_processed", "destination_weather_tp_processed", "weather_complete"]
+"dtypes" = ["timestamp[us, tz=UTC]", "large_string", "large_string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "int32", "int32", "int32", "int32", "large_string", "large_string", "large_string", "large_string", "large_string", "int32", "int64", "double", "double", "double", "double", "int64", "double", "int64", "double", "double", "double", "double", "double", "double", "double", "double", "bool"]
+"schema_verification" = "inspected with existing pyarrow at PR1 registration; stdlib tests bind exact bytes and footer magic, semantic rebuild deferred PR5"
+"primary_key" = ["corridor_id", "timestamp_utc"]
+
+[[files]]
+"id" = "v3_results"
+"legacy_source" = "v3_formal_cbam/reporting/results_v3.json"
+"private_relative_path" = "baselines/v3_formal_cbam/reporting/results_v3.json"
+"sha256" = "997264dbc1748ce42e06fdd3b3693e7ee977899890c6752f30c62ed3db076c3c"
+"bytes" = 23947438
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["version", "panel", "models", "main", "synthetic_validation", "weights", "weight_learning", "limitations", "blocked_models", "weather_adjustment", "sample_change", "replication"]
+"model_records" = 1892
+"not_estimated_records" = 35
+
+[[files]]
+"id" = "v3_catalog"
+"legacy_source" = "v3_formal_cbam/reporting/model_catalog.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/reporting/model_catalog.csv"
+"sha256" = "c27cc7bab4f77a0b475bacc8afe0aef2aa3741667f1b9164427c43f2caa6ec0d"
+"bytes" = 3002931
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 1928
+"columns" = ["model_id", "source_model_id", "notebook", "series", "outcome", "model_family", "cutoff", "bandwidth", "donut", "kernel", "HAC_lag", "hour_FE", "weekday_FE", "month_FE", "week_FE", "weather", "support", "weight_version", "sample_start", "sample_end", "N", "pre_N", "post_N", "coefficient_name", "status", "r2", "sample_hash", "spec", "interpretation", "estimate", "SE", "CI_low", "CI_high", "p_value", "covariance_reference", "weather_variant", "arm", "legacy_sample_hash", "diagnostic_metrics", "reason", "implementation_status"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "v3_coefficients"
+"legacy_source" = "v3_formal_cbam/outputs/tables/machine/T_coefficients.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/tables/machine/T_coefficients.csv"
+"sha256" = "9a4c10a586ac64b0001e4cc857b903f44d7be7d77ad1379afcb929b9be35a2f2"
+"bytes" = 16478923
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 77574
+"columns" = ["model_id", "N", "HAC_lag", "term", "coefficient", "SE", "CI_low", "CI_high", "p_value"]
+"primary_key" = ["model_id", "term"]
+
+[[files]]
+"id" = "v3_covariance_index"
+"legacy_source" = "v3_formal_cbam/outputs/tables/machine/T_covariance.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/tables/machine/T_covariance.csv"
+"sha256" = "1b34ce490e5a67ac452f06236a5886d596d292ff59c26cb2c495ce90504daa5b"
+"bytes" = 1386043
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 1926
+"columns" = ["model_id", "covariance_key", "file_path", "columns", "HAC_lag", "covariance_scope"]
+"primary_key" = ["file_path", "covariance_key"]
+"reference_base" = "v3_formal_cbam"
+"model_id_is_unique" = false
+"joint_rows" = 32
+"blank_model_id_rows" = 28
+
+[[files]]
+"id" = "v3_basic_covariances"
+"legacy_source" = "v3_formal_cbam/outputs/models/basic_covariances.npz"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/basic_covariances.npz"
+"sha256" = "a403cd2491620fe0c3dc04fa37b9d926c671091cf07bf582442aecaf59222eaa"
+"bytes" = 3002
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 10
+"array_keys_sha256" = "4ce2b0e39158f959b852b279728cde32b076acbd88e2ca64b2fc238592530257"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "v3_dictionary"
+"legacy_source" = "v3_formal_cbam/data_sources/data_dictionary.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/data_sources/data_dictionary.csv"
+"sha256" = "f495a6cab0f9ca502408ad107b41bb40604984a1d854d073c8d6f3429eafbed8"
+"bytes" = 4052
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 40
+"columns" = ["variable", "dtype", "unit", "definition", "missing_count", "role"]
+"primary_key" = ["variable"]
+
+[[files]]
+"id" = "v3_sample_summary"
+"legacy_source" = "v3_formal_cbam/outputs/tables/machine/T_model_sample_summary.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/tables/machine/T_model_sample_summary.csv"
+"sha256" = "78c777a8e191e1390a4a58120242812a45296f84b64de355c5dea0936836bf7a"
+"bytes" = 1302166
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 1928
+"columns" = ["model_id", "source_model_id", "notebook", "series", "outcome", "model_family", "cutoff", "bandwidth", "donut", "kernel", "HAC_lag", "hour_FE", "weekday_FE", "month_FE", "week_FE", "weather", "support", "weight_version", "sample_start", "sample_end", "N", "pre_N", "post_N", "coefficient_name", "status", "r2", "sample_hash", "spec", "interpretation", "estimate", "SE", "CI_low", "CI_high", "p_value", "weather_variant", "arm", "legacy_sample_hash", "diagnostic_metrics", "reason", "implementation_status"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "v2_weights"
+"legacy_source" = "v2_synthetic_cbam/tables/weights.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/tables/weights.csv"
+"sha256" = "b2b405f44a1962ff7c7332419e6f931bb3f9cfda9b8654fd959db4a4148b8535"
+"bytes" = 13303
+"role" = "frozen_required_input"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 92
+"columns" = ["target", "scheme", "lambda", "version", "training_years", "donor", "weight", "status", "reason", "omitted_donor", "loss", "trained_max_local_year", "sample_hash", "candidate_estimation_status", "prefit_support_status"]
+"primary_key" = ["target", "version", "donor"]
+"ME_versions" = 16
+"ME_rows" = 32
+"blocked_weight_rows" = 60
+
+[[files]]
+"id" = "v2_weight_predictors"
+"legacy_source" = "v2_synthetic_cbam/diagnostics/weight_predictors.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/diagnostics/weight_predictors.csv"
+"sha256" = "259692ecf5251a83b629a2c2cd2290867d9017e603d5bca90e29c494f34ab57d"
+"bytes" = 16525
+"role" = "frozen_required_input"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 127
+"columns" = ["target", "training_years", "feature", "block", "omitted", "reason", "scale", "target_value", "donor_min", "donor_max", "supported"]
+
+[[files]]
+"id" = "v2_weight_feature_freeze"
+"legacy_source" = "v2_synthetic_cbam/diagnostics/weight_feature_freeze.json"
+"private_relative_path" = "baselines/v2_synthetic_cbam/diagnostics/weight_feature_freeze.json"
+"sha256" = "b1c2162304fd1df83f4b5c007bda27b950b3e157423725280af1e6a3dfb6ba45"
+"bytes" = 1193
+"role" = "frozen_required_input"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["version", "energy", "outcome_blocks", "quantiles", "zero_top", "scaling", "statistical_threshold", "final_choice", "hydro", "coal", "other"]
+
+[[files]]
+"id" = "v2_energy_mix"
+"legacy_source" = "v2_synthetic_cbam/tables/energy_mix.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/tables/energy_mix.csv"
+"sha256" = "99409c51ac0e82ed853bc4af86ef94ad899195d61ecaca5fce0555ba0f26f62e"
+"bytes" = 34800
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 84
+"columns" = ["country", "year", "feature", "generation_gwh", "share", "total_generation_gwh", "status", "source", "source_updated", "vintage_use", "hydro_definition", "coal_definition"]
+"primary_key" = ["country", "year", "feature"]
+
+[[files]]
+"id" = "v2f_results"
+"legacy_source" = "v2_synthetic_cbam/v2f/reporting/results_v2f.json"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/reporting/results_v2f.json"
+"sha256" = "2650cd64e3d2a12272cc729faa213bb1e954cd4aa7f278d6c0d79335e584988d"
+"bytes" = 938852
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["version", "status", "research_identity", "architecture", "permanently_excluded", "main_results", "r1_actual", "placebo_2025", "support_results", "weather_abc", "weather_adjustments", "weather_status", "weather_numerical_qa", "weather_coverage", "weather_sanity", "weather_pairing", "me", "data_audit", "execution", "reproduction", "protection", "model_inventory", "coefficients_upstream", "model_catalog_upstream", "covariance_upstream", "explicit_model_status", "joint_contrasts", "gap_equivalence", "sources", "notes"]
+
+[[files]]
+"id" = "engine_all_coefficients"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/all_coefficients.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/all_coefficients.csv"
+"sha256" = "bc026d9657f41fa0cc17060e573c8e6f977e8a06fc91cf9a9ab11c51b444c014"
+"bytes" = 66229793
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 74410
+"columns" = ["model_id", "series", "model", "weight_version", "data_hash", "code_version_hash", "outcome", "bandwidth_days", "donut_days", "cutoff", "fe", "weather_version", "weather", "kernel", "support", "spec", "series_type", "weight_uncertainty", "validation_status", "interpretation", "status", "n", "n_pre", "n_post", "r2", "r2_type", "sample_hash", "sample_hash_utc_ns", "rank", "condition_number", "year_N", "reference_categories", "hac_lag", "term", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "term"]
+
+[[files]]
+"id" = "engine_weather_abc_results"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_abc_results.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_abc_results.csv"
+"sha256" = "09a49b7281cebb31d7d38c87bfebac27cf681e6a8e6e0b526369958469b37b0d"
+"bytes" = 51547
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 60
+"columns" = ["model_id", "series", "corridor", "model", "support", "variant", "arm", "weather_version", "outcome", "weight_version", "data_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "HAC", "bandwidth", "donut", "kernel", "status", "N", "N_pre", "N_post", "year_N", "rank", "condition_number", "r2", "r2_type", "FE_reference", "first_utc", "last_utc", "sample_hash_utc_ns", "sample_hash_integer_unit", "hac_lag", "estimand", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "estimand"]
+
+[[files]]
+"id" = "engine_weather_coefficients"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_coefficients.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_coefficients.csv"
+"sha256" = "e8f1b6f77e6c3287e12ef2d62a10efc9ff8446e48e001dcdd8c9fe167fa6b7e3"
+"bytes" = 1888689
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 2200
+"columns" = ["model_id", "series", "corridor", "model", "support", "variant", "arm", "weather_version", "outcome", "weight_version", "data_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "HAC", "bandwidth", "donut", "kernel", "status", "N", "N_pre", "N_post", "year_N", "rank", "condition_number", "r2", "r2_type", "FE_reference", "first_utc", "last_utc", "sample_hash_utc_ns", "sample_hash_integer_unit", "hac_lag", "term", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "term"]
+
+[[files]]
+"id" = "engine_weather_synthetic_abc_results"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_abc_results.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_abc_results.csv"
+"sha256" = "74e5ee3f16b8f39a5b77278da27737965e14165d2b0bf21f5476e53516b7d253"
+"bytes" = 24345
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 24
+"columns" = ["model_id", "series", "model", "variant", "support", "arm", "outcome", "weight_version", "weather_version", "data_hash", "weight_source_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "bandwidth", "donut", "kernel", "N", "N_pre", "N_post", "rank", "condition_number", "r2", "r2_type", "year_N", "FE_reference", "status", "evidence_status", "weight_uncertainty", "gap_directly_regressed", "sample_hash_utc_ns", "sample_hash_integer_unit", "actual_data_hash", "hac_lag", "estimand", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "estimand"]
+
+[[files]]
+"id" = "engine_weather_synthetic_coefficients"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_coefficients.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_coefficients.csv"
+"sha256" = "e407fe9b989d43aa733d09c82fdd232ee154b22c271e0dd9a54c1ef081081108"
+"bytes" = 927447
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 924
+"columns" = ["model_id", "series", "model", "variant", "support", "arm", "outcome", "weight_version", "weather_version", "data_hash", "weight_source_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "bandwidth", "donut", "kernel", "N", "N_pre", "N_post", "rank", "condition_number", "r2", "r2_type", "year_N", "FE_reference", "status", "evidence_status", "weight_uncertainty", "gap_directly_regressed", "sample_hash_utc_ns", "sample_hash_integer_unit", "actual_data_hash", "hac_lag", "term", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "term"]
+
+[[files]]
+"id" = "engine_model_covariances"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/model_covariances.npz"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/model_covariances.npz"
+"sha256" = "033d9c2f3c0230f47b8679ca0a656196e846daf7b5853bbd45f28104aa90527c"
+"bytes" = 16470615
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 1804
+"array_keys_sha256" = "1b9c8c4feb1f13566ee7a9b735a7f4e92633bb012765c03f3a61ae804866b3e8"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "engine_covariance_index"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/covariance_index.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/covariance_index.csv"
+"sha256" = "7a5f013f377585fca1e41546703b444c7c7ce4c85d033d6f711f83fab93f5bb5"
+"bytes" = 1134360
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 1804
+"columns" = ["key", "model_id", "hac_lag", "columns"]
+"primary_key" = ["key"]
+"covariance_file_id" = "engine_model_covariances"
+
+[[files]]
+"id" = "engine_weather_covariances"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_covariances.npz"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_covariances.npz"
+"sha256" = "02e41812d3702ee31cbc97e5d2387842263a7da9033b751bbd70b66ad417bf8d"
+"bytes" = 1151956
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 80
+"array_keys_sha256" = "427acb6dc83bdaf39fad753c003c45cb12bdddfad7b91706da6ad382c731cd1a"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "engine_weather_covariance_index"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_covariance_index.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_covariance_index.csv"
+"sha256" = "bdffbceb10a383e4b623f571c7a8cf6a7cfc6d3d3ceb32f5b5ee9130aeb0c0b5"
+"bytes" = 69928
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 80
+"columns" = ["key", "columns"]
+"primary_key" = ["key"]
+"covariance_file_id" = "engine_weather_covariances"
+
+[[files]]
+"id" = "engine_weather_synthetic_covariances"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_covariances.npz"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_covariances.npz"
+"sha256" = "c7c714fe8c0e55ade0f44d798d7a27737304324ce3117b5c7747461cb30e555c"
+"bytes" = 574435
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 32
+"array_keys_sha256" = "90ea1cd35c448fad0b982878b4a6be1944d3077b6535769ec5585848235d895f"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "engine_weather_synthetic_covariance_index"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_covariance_index.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_covariance_index.csv"
+"sha256" = "4b01b8f85f2686e9d79acc268c7288817fe3642e5505cae675b6dc49b85679e7"
+"bytes" = 31916
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 32
+"columns" = ["key", "columns"]
+"primary_key" = ["key"]
+"covariance_file_id" = "engine_weather_synthetic_covariances"
+
+[[files]]
+"id" = "engine_model_catalog"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/model_catalog.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/model_catalog.csv"
+"sha256" = "264223049ed06d28cfd0e03c0c7e92a44fb766855a0610c33a050a4eabf7a744"
+"bytes" = 1219763
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 899
+"columns" = ["model_id", "series", "model", "weight_version", "data_hash", "code_version_hash", "outcome", "bandwidth_days", "donut_days", "cutoff", "fe", "weather_version", "weather", "kernel", "support", "spec", "series_type", "weight_uncertainty", "validation_status", "interpretation", "status", "n", "omitted_terms", "absorbed_terms", "references", "columns", "rank", "k", "condition_number", "n_pre", "n_post", "r2", "r2_type", "sample_hash", "sample_hash_utc_ns", "sample_hash_integer_unit", "first_utc", "last_utc", "year_N", "missing_elapsed_hours"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "engine_explicit_model_status"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/explicit_model_status.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/explicit_model_status.csv"
+"sha256" = "6f61d9e9c27433fdef100f28ec526235ac92f26d7d687f9e31a507d65930a6f8"
+"bytes" = 2257
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 22
+"columns" = ["series", "model", "cutoff", "status", "reason"]
+
+[[files]]
+"id" = "engine_weather_model_design"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_model_design.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_model_design.csv"
+"sha256" = "68a92492027a513b724aa3b6d1dc46f4313035724d0dfccca2aa91fb1b24ad85"
+"bytes" = 38196
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 30
+"columns" = ["model_id", "series", "corridor", "model", "support", "variant", "arm", "weather_version", "outcome", "weight_version", "data_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "HAC", "bandwidth", "donut", "kernel", "status", "N", "N_pre", "N_post", "year_N", "rank", "condition_number", "r2", "r2_type", "FE_reference", "first_utc", "last_utc", "sample_hash_utc_ns", "sample_hash_integer_unit", "columns", "omitted", "absorbed"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "engine_weather_synthetic_design"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_design.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_design.csv"
+"sha256" = "daabc441b98255d0d0f453d394e56df1290c210910748da98451c317de70e95e"
+"bytes" = 18207
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 12
+"columns" = ["model_id", "series", "model", "variant", "support", "arm", "outcome", "weight_version", "weather_version", "data_hash", "weight_source_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "bandwidth", "donut", "kernel", "N", "N_pre", "N_post", "rank", "condition_number", "r2", "r2_type", "year_N", "FE_reference", "status", "evidence_status", "weight_uncertainty", "gap_directly_regressed", "sample_hash_utc_ns", "sample_hash_integer_unit", "actual_data_hash", "columns", "omitted"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "engine_weather_model_status"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_model_status.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_model_status.csv"
+"sha256" = "183d8b470d8316f6f311ee9c97ffe11c34138914ca2f0086f416b857e733df0e"
+"bytes" = 3002
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 20
+"columns" = ["series", "model", "support", "variant", "status", "N", "reason", "expected_N", "complete_N", "geographies"]
+
+[[files]]
+"id" = "engine_weather_synthetic_model_status"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_model_status.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_model_status.csv"
+"sha256" = "5fec56b110ee6829f4cdcc61bedd4366aca7afd97dae4927688897d0bd9a8aec"
+"bytes" = 1087
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 7
+"columns" = ["series", "model", "status", "reason", "weight_version", "evidence_status", "variant"]
+
+[[files]]
+"id" = "engine_weather_sample_pairing"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_sample_pairing.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_sample_pairing.csv"
+"sha256" = "cb5976d2c186186f534913b49b4b45af813bd68d9392a5823f7925a339571391"
+"bytes" = 2899
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 10
+"columns" = ["series", "model", "support", "variant", "status", "N_A", "N_B", "N_C", "N_pre_B", "N_post_B", "sample_hash_B", "sample_hash_C", "HAC_identical", "bandwidth_identical", "donut_identical", "timestamp_equality", "N_equality", "yearly_N_equality", "outcome_equality", "kernel_equality", "FE_references_equality", "core_design_equality", "pre_post_equality", "endpoint_equality"]
+
+[[files]]
+"id" = "engine_weather_synthetic_pairing"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_pairing.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_pairing.csv"
+"sha256" = "5ed2657b95442481d71a3b6f9c42dbf5f307322d7d5e7b5c0e57969e6dbcf2a3"
+"bytes" = 1143
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 4
+"columns" = ["series", "model", "variant", "N_A", "N_B", "N_C", "sample_hash_B", "sample_hash_C", "status", "timestamp_equality", "N_equality", "yearly_N_equality", "outcome_equality", "kernel_equality", "FE_references_equality", "core_design_equality", "pre_post_equality", "endpoint_equality"]
+
+[[files]]
+"id" = "engine_weather_centering_constants"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_centering_constants.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_centering_constants.csv"
+"sha256" = "0f3797b1a4bac131f7065e375d1048dc7b2c2bf287251f8aa8d89447be41d8b9"
+"bytes" = 10183
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 40
+"columns" = ["series", "model", "geography", "variable", "center", "N_reference", "reference", "first_utc", "last_utc", "sample_hash", "weather_data_hash"]
+
+[[files]]
+"id" = "engine_weather_synthetic_centers"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_centers.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_centers.csv"
+"sha256" = "6a61e00ff99c092bab6cab21853d5b4798a96825a4957c96547d8b8d0296fa98"
+"bytes" = 4440
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 24
+"columns" = ["geography", "variable", "center", "N_reference", "first_utc", "last_utc", "sample_hash", "reference"]
+
+[[files]]
+"id" = "engine_weather_membership"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_membership.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_membership.csv"
+"sha256" = "7532b6d7b1dd9d0ed8eeaba75aed8ba902e9a54bfd25c19362019b107d55898e"
+"bytes" = 3045652
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 43200
+"columns" = ["series", "model", "support", "variant", "timestamp_utc", "included"]
+
+[[files]]
+"id" = "engine_weather_omitted_columns"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_omitted_columns.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_omitted_columns.csv"
+"sha256" = "4d8f8381c66968dfb24ade85005cf17a05bcc3698d3ed863246048fd08311dd1"
+"bytes" = 56
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 0
+"columns" = ["series", "model", "support", "variant", "column", "reason", "duplicate_of"]
+
+[[files]]
+"id" = "engine_weather_synthetic_omitted"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_omitted.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_omitted.csv"
+"sha256" = "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+"bytes" = 1
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 0
+"columns" = []
+
+[[files]]
+"id" = "engine_weather_sample_composition"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_sample_composition.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_sample_composition.csv"
+"sha256" = "e10f54b07b5be8b62b0db3a82bd8854a3603e73e8c13939ea9f3246172503145"
+"bytes" = 822
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 25
+"columns" = ["series", "model", "year", "expected_hours", "complete_case_hours", "missing_hours"]
+
+[[files]]
+"id" = "engine_weather_synthetic_required_coverage"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_required_coverage.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_required_coverage.csv"
+"sha256" = "15af102a7c7ee6252d2ece14b0dced15280934b0d651b5672e72994d10fd9939"
+"bytes" = 277
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 6
+"columns" = ["geography", "expected_hours", "complete_hours", "status"]
+
+[[files]]
+"id" = "engine_weather_synthetic_annual_coverage"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_annual_coverage.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/diagnostics/weather_synthetic_annual_coverage.csv"
+"sha256" = "988a8795c69c84acf292bceb14b1b490e270c0203330808add00d07ff74daf55"
+"bytes" = 138
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 6
+"columns" = ["geography", "expected_hours", "complete_hours"]
+
+[[files]]
+"id" = "engine_support_restrictions"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/support_restrictions.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/support_restrictions.csv"
+"sha256" = "42e8a7dc72e14b81784a9f741252cf0ca0a2be70fe0ecb56c62a0728d3bdfafa"
+"bytes" = 48359
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 330
+"columns" = ["series", "weight_version", "support", "year", "lower", "upper", "n_original", "n_kept", "n_deleted", "deletion_rate", "status", "hours_per_eur_mwh", "sample_hash"]
+
+[[files]]
+"id" = "engine_joint_covariance_contrasts"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/joint_covariance_contrasts.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/joint_covariance_contrasts.csv"
+"sha256" = "7f32ae356457a24dd75d34b1d8b525a37e7bd6c7385051b058f42ae8fbdc3890"
+"bytes" = 3977
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 52
+"columns" = ["kind", "series_a", "series_b", "hac_lag", "covariance", "series", "weight_version", "n", "sample_hash", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+
+[[files]]
+"id" = "engine_weather_adjustments"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_adjustments.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_adjustments.csv"
+"sha256" = "dbed14e4abc11aaddc78796d70e4d446ff4830284e7cd21841fe3d256a26db28"
+"bytes" = 5581
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 40
+"columns" = ["series", "model", "support", "variant", "hac_lag", "estimand", "contrast", "relative_weather_adjustment", "joint_cross_covariance_retained", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+
+[[files]]
+"id" = "engine_weather_synthetic_adjustments"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_adjustments.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/weather_synthetic_adjustments.csv"
+"sha256" = "827bb511b644c5d318bf7cb3478ef70c75fd5e7a12d1254d0e21b0b514ab5320"
+"bytes" = 2118
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 16
+"columns" = ["series", "model", "variant", "support", "estimand", "contrast", "hac_lag", "joint_cross_covariance_retained", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+
+[[files]]
+"id" = "v2f_all_coefficients"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/all_coefficients.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/all_coefficients.csv"
+"sha256" = "643540999b428bc2c1596fe610e6132cc33aa73b67cd09d8d9a3a44900c6dfd1"
+"bytes" = 66229809
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 74410
+"columns" = ["model_id", "series", "model", "weight_version", "data_hash", "code_version_hash", "outcome", "bandwidth_days", "donut_days", "cutoff", "fe", "weather_version", "weather", "kernel", "support", "spec", "series_type", "weight_uncertainty", "validation_status", "interpretation", "status", "n", "n_pre", "n_post", "r2", "r2_type", "sample_hash", "sample_hash_utc_ns", "rank", "condition_number", "year_N", "reference_categories", "hac_lag", "term", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "term"]
+
+[[files]]
+"id" = "v2f_weather_abc_results"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_abc_results.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_abc_results.csv"
+"sha256" = "09a49b7281cebb31d7d38c87bfebac27cf681e6a8e6e0b526369958469b37b0d"
+"bytes" = 51547
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 60
+"columns" = ["model_id", "series", "corridor", "model", "support", "variant", "arm", "weather_version", "outcome", "weight_version", "data_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "HAC", "bandwidth", "donut", "kernel", "status", "N", "N_pre", "N_post", "year_N", "rank", "condition_number", "r2", "r2_type", "FE_reference", "first_utc", "last_utc", "sample_hash_utc_ns", "sample_hash_integer_unit", "hac_lag", "estimand", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "estimand"]
+
+[[files]]
+"id" = "v2f_weather_coefficients"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_coefficients.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_coefficients.csv"
+"sha256" = "e8f1b6f77e6c3287e12ef2d62a10efc9ff8446e48e001dcdd8c9fe167fa6b7e3"
+"bytes" = 1888689
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 2200
+"columns" = ["model_id", "series", "corridor", "model", "support", "variant", "arm", "weather_version", "outcome", "weight_version", "data_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "HAC", "bandwidth", "donut", "kernel", "status", "N", "N_pre", "N_post", "year_N", "rank", "condition_number", "r2", "r2_type", "FE_reference", "first_utc", "last_utc", "sample_hash_utc_ns", "sample_hash_integer_unit", "hac_lag", "term", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "term"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_abc_results"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_synthetic_abc_results.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_synthetic_abc_results.csv"
+"sha256" = "74e5ee3f16b8f39a5b77278da27737965e14165d2b0bf21f5476e53516b7d253"
+"bytes" = 24345
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 24
+"columns" = ["model_id", "series", "model", "variant", "support", "arm", "outcome", "weight_version", "weather_version", "data_hash", "weight_source_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "bandwidth", "donut", "kernel", "N", "N_pre", "N_post", "rank", "condition_number", "r2", "r2_type", "year_N", "FE_reference", "status", "evidence_status", "weight_uncertainty", "gap_directly_regressed", "sample_hash_utc_ns", "sample_hash_integer_unit", "actual_data_hash", "hac_lag", "estimand", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "estimand"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_coefficients"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_synthetic_coefficients.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_synthetic_coefficients.csv"
+"sha256" = "e407fe9b989d43aa733d09c82fdd232ee154b22c271e0dd9a54c1ef081081108"
+"bytes" = 927447
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 924
+"columns" = ["model_id", "series", "model", "variant", "support", "arm", "outcome", "weight_version", "weather_version", "data_hash", "weight_source_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "bandwidth", "donut", "kernel", "N", "N_pre", "N_post", "rank", "condition_number", "r2", "r2_type", "year_N", "FE_reference", "status", "evidence_status", "weight_uncertainty", "gap_directly_regressed", "sample_hash_utc_ns", "sample_hash_integer_unit", "actual_data_hash", "hac_lag", "term", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+"primary_key" = ["model_id", "hac_lag", "term"]
+
+[[files]]
+"id" = "v2f_model_covariances"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/model_covariances.npz"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/model_covariances.npz"
+"sha256" = "b7d9037c91e179576b2ef2ebedf7898395f36fc2978f9ce9c1cff11328236d39"
+"bytes" = 16470686
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 1804
+"array_keys_sha256" = "1b9c8c4feb1f13566ee7a9b735a7f4e92633bb012765c03f3a61ae804866b3e8"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "v2f_covariance_index"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/covariance_index.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/covariance_index.csv"
+"sha256" = "7a5f013f377585fca1e41546703b444c7c7ce4c85d033d6f711f83fab93f5bb5"
+"bytes" = 1134360
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 1804
+"columns" = ["key", "model_id", "hac_lag", "columns"]
+"primary_key" = ["key"]
+"covariance_file_id" = "v2f_model_covariances"
+
+[[files]]
+"id" = "v2f_weather_covariances"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_covariances.npz"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_covariances.npz"
+"sha256" = "02e41812d3702ee31cbc97e5d2387842263a7da9033b751bbd70b66ad417bf8d"
+"bytes" = 1151956
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 80
+"array_keys_sha256" = "427acb6dc83bdaf39fad753c003c45cb12bdddfad7b91706da6ad382c731cd1a"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "v2f_weather_covariance_index"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_covariance_index.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_covariance_index.csv"
+"sha256" = "bdffbceb10a383e4b623f571c7a8cf6a7cfc6d3d3ceb32f5b5ee9130aeb0c0b5"
+"bytes" = 69928
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 80
+"columns" = ["key", "columns"]
+"primary_key" = ["key"]
+"covariance_file_id" = "v2f_weather_covariances"
+
+[[files]]
+"id" = "v2f_weather_synthetic_covariances"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_synthetic_covariances.npz"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_synthetic_covariances.npz"
+"sha256" = "16b2481379318688d5a974e747ccc53022e996589ea16bea4542317e0262317f"
+"bytes" = 574464
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "npz"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"array_count" = 32
+"array_keys_sha256" = "90ea1cd35c448fad0b982878b4a6be1944d3077b6535769ec5585848235d895f"
+"array_schema" = "NPY float64 finite square covariance; named parameter order from corresponding index"
+
+[[files]]
+"id" = "v2f_weather_synthetic_covariance_index"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_synthetic_covariance_index.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_synthetic_covariance_index.csv"
+"sha256" = "4b01b8f85f2686e9d79acc268c7288817fe3642e5505cae675b6dc49b85679e7"
+"bytes" = 31916
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 32
+"columns" = ["key", "columns"]
+"primary_key" = ["key"]
+"covariance_file_id" = "v2f_weather_synthetic_covariances"
+
+[[files]]
+"id" = "v2f_model_catalog"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/model_catalog.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/model_catalog.csv"
+"sha256" = "5eb0a07be10d3880fe80715ff29a7acfd58e969b32f80215f03904864b772b63"
+"bytes" = 1219762
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 899
+"columns" = ["model_id", "series", "model", "weight_version", "data_hash", "code_version_hash", "outcome", "bandwidth_days", "donut_days", "cutoff", "fe", "weather_version", "weather", "kernel", "support", "spec", "series_type", "weight_uncertainty", "validation_status", "interpretation", "status", "n", "omitted_terms", "absorbed_terms", "references", "columns", "rank", "k", "condition_number", "n_pre", "n_post", "r2", "r2_type", "sample_hash", "sample_hash_utc_ns", "sample_hash_integer_unit", "first_utc", "last_utc", "year_N", "missing_elapsed_hours"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "v2f_explicit_model_status"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/explicit_model_status.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/explicit_model_status.csv"
+"sha256" = "6f61d9e9c27433fdef100f28ec526235ac92f26d7d687f9e31a507d65930a6f8"
+"bytes" = 2257
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 22
+"columns" = ["series", "model", "cutoff", "status", "reason"]
+
+[[files]]
+"id" = "v2f_weather_model_design"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_model_design.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_model_design.csv"
+"sha256" = "68a92492027a513b724aa3b6d1dc46f4313035724d0dfccca2aa91fb1b24ad85"
+"bytes" = 38196
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 30
+"columns" = ["model_id", "series", "corridor", "model", "support", "variant", "arm", "weather_version", "outcome", "weight_version", "data_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "HAC", "bandwidth", "donut", "kernel", "status", "N", "N_pre", "N_post", "year_N", "rank", "condition_number", "r2", "r2_type", "FE_reference", "first_utc", "last_utc", "sample_hash_utc_ns", "sample_hash_integer_unit", "columns", "omitted", "absorbed"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_design"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_design.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_design.csv"
+"sha256" = "daabc441b98255d0d0f453d394e56df1290c210910748da98451c317de70e95e"
+"bytes" = 18207
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 12
+"columns" = ["model_id", "series", "model", "variant", "support", "arm", "outcome", "weight_version", "weather_version", "data_hash", "weight_source_hash", "weather_data_hash", "code_version_hash", "sample_hash", "FE", "bandwidth", "donut", "kernel", "N", "N_pre", "N_post", "rank", "condition_number", "r2", "r2_type", "year_N", "FE_reference", "status", "evidence_status", "weight_uncertainty", "gap_directly_regressed", "sample_hash_utc_ns", "sample_hash_integer_unit", "actual_data_hash", "columns", "omitted"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "v2f_weather_model_status"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_model_status.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_model_status.csv"
+"sha256" = "183d8b470d8316f6f311ee9c97ffe11c34138914ca2f0086f416b857e733df0e"
+"bytes" = 3002
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 20
+"columns" = ["series", "model", "support", "variant", "status", "N", "reason", "expected_N", "complete_N", "geographies"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_model_status"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_model_status.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_model_status.csv"
+"sha256" = "5fec56b110ee6829f4cdcc61bedd4366aca7afd97dae4927688897d0bd9a8aec"
+"bytes" = 1087
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 7
+"columns" = ["series", "model", "status", "reason", "weight_version", "evidence_status", "variant"]
+
+[[files]]
+"id" = "v2f_weather_sample_pairing"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_sample_pairing.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_sample_pairing.csv"
+"sha256" = "cb5976d2c186186f534913b49b4b45af813bd68d9392a5823f7925a339571391"
+"bytes" = 2899
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 10
+"columns" = ["series", "model", "support", "variant", "status", "N_A", "N_B", "N_C", "N_pre_B", "N_post_B", "sample_hash_B", "sample_hash_C", "HAC_identical", "bandwidth_identical", "donut_identical", "timestamp_equality", "N_equality", "yearly_N_equality", "outcome_equality", "kernel_equality", "FE_references_equality", "core_design_equality", "pre_post_equality", "endpoint_equality"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_pairing"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_pairing.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_pairing.csv"
+"sha256" = "5ed2657b95442481d71a3b6f9c42dbf5f307322d7d5e7b5c0e57969e6dbcf2a3"
+"bytes" = 1143
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 4
+"columns" = ["series", "model", "variant", "N_A", "N_B", "N_C", "sample_hash_B", "sample_hash_C", "status", "timestamp_equality", "N_equality", "yearly_N_equality", "outcome_equality", "kernel_equality", "FE_references_equality", "core_design_equality", "pre_post_equality", "endpoint_equality"]
+
+[[files]]
+"id" = "v2f_weather_centering_constants"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_centering_constants.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_centering_constants.csv"
+"sha256" = "0f3797b1a4bac131f7065e375d1048dc7b2c2bf287251f8aa8d89447be41d8b9"
+"bytes" = 10183
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 40
+"columns" = ["series", "model", "geography", "variable", "center", "N_reference", "reference", "first_utc", "last_utc", "sample_hash", "weather_data_hash"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_centers"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_centers.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_centers.csv"
+"sha256" = "6a61e00ff99c092bab6cab21853d5b4798a96825a4957c96547d8b8d0296fa98"
+"bytes" = 4440
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 24
+"columns" = ["geography", "variable", "center", "N_reference", "first_utc", "last_utc", "sample_hash", "reference"]
+
+[[files]]
+"id" = "v2f_weather_membership"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_membership.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_membership.csv"
+"sha256" = "7532b6d7b1dd9d0ed8eeaba75aed8ba902e9a54bfd25c19362019b107d55898e"
+"bytes" = 3045652
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 43200
+"columns" = ["series", "model", "support", "variant", "timestamp_utc", "included"]
+
+[[files]]
+"id" = "v2f_weather_omitted_columns"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_omitted_columns.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_omitted_columns.csv"
+"sha256" = "4d8f8381c66968dfb24ade85005cf17a05bcc3698d3ed863246048fd08311dd1"
+"bytes" = 56
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 0
+"columns" = ["series", "model", "support", "variant", "column", "reason", "duplicate_of"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_omitted"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_omitted.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_omitted.csv"
+"sha256" = "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+"bytes" = 1
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 0
+"columns" = []
+
+[[files]]
+"id" = "v2f_weather_sample_composition"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_sample_composition.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_sample_composition.csv"
+"sha256" = "e10f54b07b5be8b62b0db3a82bd8854a3603e73e8c13939ea9f3246172503145"
+"bytes" = 822
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 25
+"columns" = ["series", "model", "year", "expected_hours", "complete_case_hours", "missing_hours"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_required_coverage"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_required_coverage.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_required_coverage.csv"
+"sha256" = "15af102a7c7ee6252d2ece14b0dced15280934b0d651b5672e72994d10fd9939"
+"bytes" = 277
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 6
+"columns" = ["geography", "expected_hours", "complete_hours", "status"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_annual_coverage"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_annual_coverage.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/weather_synthetic_annual_coverage.csv"
+"sha256" = "988a8795c69c84acf292bceb14b1b490e270c0203330808add00d07ff74daf55"
+"bytes" = 138
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 6
+"columns" = ["geography", "expected_hours", "complete_hours"]
+
+[[files]]
+"id" = "v2f_support_restrictions"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/support_restrictions.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/support_restrictions.csv"
+"sha256" = "2b7e995387f61c106a2f2f3fd4bce0f529ee37d9a0885295201840d7d7e91bb4"
+"bytes" = 48356
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 330
+"columns" = ["series", "weight_version", "support", "year", "lower", "upper", "n_original", "n_kept", "n_deleted", "deletion_rate", "status", "hours_per_eur_mwh", "sample_hash"]
+
+[[files]]
+"id" = "v2f_joint_covariance_contrasts"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/joint_covariance_contrasts.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/joint_covariance_contrasts.csv"
+"sha256" = "3ffaba207c55d2c80cf1ff67d86b66bd5192abe59ca1b2a22118cfda5d7f838f"
+"bytes" = 3975
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 52
+"columns" = ["kind", "series_a", "series_b", "hac_lag", "covariance", "series", "weight_version", "n", "sample_hash", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+
+[[files]]
+"id" = "v2f_weather_adjustments"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_adjustments.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_adjustments.csv"
+"sha256" = "dbed14e4abc11aaddc78796d70e4d446ff4830284e7cd21841fe3d256a26db28"
+"bytes" = 5581
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 40
+"columns" = ["series", "model", "support", "variant", "hac_lag", "estimand", "contrast", "relative_weather_adjustment", "joint_cross_covariance_retained", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+
+[[files]]
+"id" = "v2f_weather_synthetic_adjustments"
+"legacy_source" = "v2_synthetic_cbam/v2f/tables/weather_synthetic_adjustments.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/tables/weather_synthetic_adjustments.csv"
+"sha256" = "0e23d718c8f39d3e4eeb092b0a5445b92c01b60661adc841de88fe2a6d13f59c"
+"bytes" = 2119
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 16
+"columns" = ["series", "model", "variant", "support", "estimand", "contrast", "hac_lag", "joint_cross_covariance_retained", "coefficient", "se", "ci_low", "ci_high", "p_value"]
+
+[[files]]
+"id" = "v2f_hash_encoding"
+"legacy_source" = "v2_synthetic_cbam/v2f/diagnostics/frozen_sample_hash_encoding.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v2f/diagnostics/frozen_sample_hash_encoding.csv"
+"sha256" = "667f7a1c6e5117d59f039f05a4cd87d520bfcf29ef707e9a5d6638663b1d022e"
+"bytes" = 6778
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 24
+"columns" = ["model", "variant", "arm", "hac_lag", "status", "exact_timestamps_equal", "native_hash", "frozen_hash", "frozen_hash_unit", "canonical_ns_hash", "native_datetime_dtype", "encoding_only_difference"]
+
+[[files]]
+"id" = "engine_synthetic_validation"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_validation.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_validation.csv"
+"sha256" = "92f470c0760df9a68b265ab95d426b765fd11f36a0baa6cfed0984362f10129d"
+"bytes" = 2038
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 2
+"columns" = ["target", "method", "year", "model_id", "data_hash", "code_version_hash", "outcome", "weight_version", "weather_version", "FE", "HAC", "bandwidth", "support", "evaluation", "training_year", "sample_hash", "frozen_sample_hash", "sample_hash_definition", "status", "n", "rmse", "mae", "bias", "nrmse", "training_target_sd", "actual_mean", "actual_sd", "actual_zero_share", "actual_p5", "actual_p50", "actual_p95", "predicted_mean", "predicted_sd", "predicted_zero_share", "predicted_p5", "predicted_p50", "predicted_p95"]
+
+[[files]]
+"id" = "engine_synthetic_validation_monthly"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_validation_monthly.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_validation_monthly.csv"
+"sha256" = "a8257a87522d22e9436cbfdc291239ffff1622e956f7c4478b39c55e9fc94334"
+"bytes" = 4940
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 12
+"columns" = ["month", "year", "method", "model_id", "sample_hash", "n", "rmse", "mae", "bias", "nrmse", "training_target_sd", "actual_mean", "actual_sd", "actual_zero_share", "actual_p5", "actual_p50", "actual_p95", "predicted_mean", "predicted_sd", "predicted_zero_share", "predicted_p5", "predicted_p50", "predicted_p95"]
+
+[[files]]
+"id" = "engine_synthetic_validation_baselines"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_validation_baselines.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_validation_baselines.csv"
+"sha256" = "5006848130babbdecdff2e8ad24874bdef5f96eb4d04734ed10e1e5c7adb08cf"
+"bytes" = 1661
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 4
+"columns" = ["method", "training_year", "validation_year", "sample_hash", "n", "rmse", "mae", "bias", "nrmse", "training_target_sd", "actual_mean", "actual_sd", "actual_zero_share", "actual_p5", "actual_p50", "actual_p95", "predicted_mean", "predicted_sd", "predicted_zero_share", "predicted_p5", "predicted_p50", "predicted_p95"]
+
+[[files]]
+"id" = "engine_synthetic_scorecard"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_scorecard.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_scorecard.csv"
+"sha256" = "99587619af7c52e4994b20b89b25459248e1c0911ca39db3e36fcfc5c2b1de56"
+"bytes" = 1014
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 1
+"columns" = ["target", "method", "training_year", "validation_year", "status", "donor_1", "donor_1_weight", "donor_2", "donor_2_weight", "max_weight", "weight_hhi", "rmse_2024", "nrmse_2024", "mae_2024", "bias_2024", "avg_daily_gap_2024_mw", "avg_abs_daily_gap_2024_mw", "mean_daily_actual_2024", "mean_daily_synth_2024", "rmse_2025", "nrmse_2025", "mae_2025", "bias_2025", "avg_daily_gap_2025_mw", "avg_abs_daily_gap_2025_mw", "mean_daily_actual_2025", "mean_daily_synth_2025", "naive_rmse_2025", "naive_monthhour_rmse_2025", "validation_r2_2025", "error_improvement_pct_2025"]
+
+[[files]]
+"id" = "engine_synthetic_convex_support"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_convex_support.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_convex_support.csv"
+"sha256" = "f709a754ecac0722bc08a0093fef75d40dfeebefd7d51c19032c087ade074dba"
+"bytes" = 578
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 2
+"columns" = ["target", "year", "n", "sample_hash", "outside_share", "mean_distance", "median_distance", "p90_distance", "p95_distance", "max_distance", "convex_lb_rmse", "interpretation"]
+
+[[files]]
+"id" = "engine_synthetic_zero_state"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_zero_state.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_zero_state.csv"
+"sha256" = "1200c3f8bb18184580b46adfb11c7700875421d21e920309d22d76a580edc0ff"
+"bytes" = 283
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 2
+"columns" = ["year", "actual_zero_share", "predicted_zero_share", "positive_weight_donors_joint_zero_share", "identity_mismatches", "all_frozen_weights_strictly_positive"]
+
+[[files]]
+"id" = "engine_synthetic_daily_training_validation"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_daily_training_validation.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_daily_training_validation.csv"
+"sha256" = "b95541b6ca934c55897fa11eb058f5c02a0076eb8acded411acb1337b0cd88e3"
+"bytes" = 70167
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 731
+"columns" = ["actual", "prediction", "donor_min", "donor_max", "gap_prediction_minus_actual", "year", "date", "hours"]
+
+[[files]]
+"id" = "engine_synthetic_G_GY_validation_appendix"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_G_GY_validation_appendix.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_G_GY_validation_appendix.csv"
+"sha256" = "cd33aa85090b6b71740f6ff0d851b911fcb4ff9f60da1496d8cbe3c779493f0c"
+"bytes" = 11970
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 16
+"columns" = ["model", "year", "window", "evaluation", "first_utc", "last_utc", "sample_hash", "n", "rmse", "mae", "bias", "nrmse", "training_target_sd", "actual_mean", "actual_sd", "actual_zero_fraction", "actual_above_2024_target_p95", "actual_ge_570", "actual_at_600", "actual_max", "actual_p5", "actual_p10", "actual_p25", "actual_p50", "actual_p75", "actual_p90", "actual_p95", "actual_p99", "predicted_mean", "predicted_sd", "predicted_zero_fraction", "predicted_above_2024_target_p95", "predicted_ge_570", "predicted_at_600", "predicted_max", "predicted_p5", "predicted_p10", "predicted_p25", "predicted_p50", "predicted_p75", "predicted_p90", "predicted_p95", "predicted_p99", "validation_previously_seen", "interpretation"]
+
+[[files]]
+"id" = "engine_synthetic_frozen_weights"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/tables/V2F_ME_frozen_weights.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/tables/V2F_ME_frozen_weights.csv"
+"sha256" = "72f110a620487dc94de090f73eb64259451b4efa0b54500f71f943916cf4d62b"
+"bytes" = 6280
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 32
+"columns" = ["target", "scheme", "lambda", "version", "training_years", "donor", "weight", "status", "reason", "omitted_donor", "loss", "trained_max_local_year", "sample_hash", "candidate_estimation_status", "prefit_support_status"]
+
+[[files]]
+"id" = "engine_synthetic_results"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/reporting/synthetic_me.json"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/reporting/synthetic_me.json"
+"sha256" = "6c218ee14416bbc100adfc4bd2fc01b9f374dcedd814d64a500b300782b8e814"
+"bytes" = 299698
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["status", "model_fit", "weights_reestimated", "accepted_target", "donors", "weights", "validation_weight_version", "final_weight_version", "validation_previously_seen", "validation", "monthly", "scorecard", "baselines", "convex_support", "zero_states", "daily", "scheme_validation_appendix", "SI_expansion", "SI_weights", "sources", "code_sha256", "checks", "synthetic_path", "synthetic_all_versions_path", "sample_hash_definition", "G_ME_definition", "metadata", "v3_independent_weight_refit"]
+
+[[files]]
+"id" = "engine_me_synthetic_frozen"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/data/processed/me_synthetic_frozen.parquet"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/data/processed/me_synthetic_frozen.parquet"
+"sha256" = "9a371b6b7179bfe6679fbc1038e0d7c585b9b32f9873467b62a8c10512a565bd"
+"bytes" = 2699376
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "parquet"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 47518
+"columns" = ["timestamp_utc", "actual_ME", "scheduled_export_proxy", "commercial_net_MW", "physical_net_MW", "raw_price_spread", "spread_center", "spread_c", "G_ME", "G_ME_commercial_net", "weight_version", "series", "status", "weight_training_years", "sample_hash", "frozen_sample_hash"]
+"dtypes" = ["timestamp[us, tz=UTC]", "double", "double", "double", "double", "double", "double", "double", "double", "double", "large_string", "large_string", "large_string", "large_string", "large_string", "large_string"]
+"schema_verification" = "inspected with existing pyarrow at PR1 registration; stdlib tests bind exact bytes and footer magic, semantic rebuild deferred PR5"
+"primary_key" = ["weight_version", "timestamp_utc"]
+
+[[files]]
+"id" = "engine_me_synthetic_all_frozen_versions"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/data/processed/me_synthetic_all_frozen_versions.parquet"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/data/processed/me_synthetic_all_frozen_versions.parquet"
+"sha256" = "10797863f161071f6eff704bb6eeb6cc163029c252c271941fc3c193e9ec1859"
+"bytes" = 14657941
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "parquet"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 380144
+"columns" = ["timestamp_utc", "actual_ME", "scheduled_export_proxy", "commercial_net_MW", "physical_net_MW", "raw_price_spread", "spread_center", "spread_c", "G_ME", "G_ME_commercial_net", "weight_version", "series", "status", "weight_training_years", "sample_hash", "frozen_sample_hash"]
+"dtypes" = ["timestamp[us, tz=UTC]", "double", "double", "double", "double", "double", "double", "double", "double", "double", "large_string", "large_string", "large_string", "large_string", "large_string", "large_string"]
+"schema_verification" = "inspected with existing pyarrow at PR1 registration; stdlib tests bind exact bytes and footer magic, semantic rebuild deferred PR5"
+"primary_key" = ["weight_version", "timestamp_utc"]
+
+[[files]]
+"id" = "engine_weather_panel_hourly"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/data/processed/weather_panel_hourly.parquet"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/data/processed/weather_panel_hourly.parquet"
+"sha256" = "c23cf9c1682af1548ea24f9cc6b9b40cc2b25c8f487b43725961159cb9213656"
+"bytes" = 1480867
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "parquet"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 41486
+"columns" = ["timestamp_utc", "geography", "ssrd_processed", "temp_c", "tp_processed", "wind_ms"]
+"dtypes" = ["timestamp[ns, tz=UTC]", "large_string", "double", "double", "double", "double"]
+"schema_verification" = "inspected with existing pyarrow at PR1 registration; stdlib tests bind exact bytes and footer magic, semantic rebuild deferred PR5"
+"primary_key" = ["geography", "timestamp_utc"]
+
+[[files]]
+"id" = "engine_weather_synthetic_definition"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/metadata/weather_synthetic_definition.json"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/metadata/weather_synthetic_definition.json"
+"sha256" = "c8db680b5310ba3da9e9f949396e75f3db646adfbbe2e31489e9f6c18f195ec8"
+"bytes" = 4330
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["ME_synthetic__FULL_WEATHER_QUADRATIC", "ME_synthetic__WEATHER_LINEAR_ONLY", "G_ME__FULL_WEATHER_QUADRATIC", "G_ME__WEATHER_LINEAR_ONLY"]
+
+[[files]]
+"id" = "engine_weather_sources"
+"legacy_source" = "v3_formal_cbam/outputs/models/engine/metadata/weather_sources.json"
+"private_relative_path" = "baselines/v3_formal_cbam/outputs/models/engine/metadata/weather_sources.json"
+"sha256" = "3b3eb1493dd6d2b0cc2e01623b75cc2e554e50a4b86c38a44ead50d62b60e659"
+"bytes" = 564
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["status", "acquisition_this_run", "new_completed_requests", "dataset", "panel_sha256", "frozen_panel_sha256", "files_verified", "reanalysis_not_forecast", "request_status_as_of", "duplicates_max_numeric_difference"]
+
+[[files]]
+"id" = "sample_ME_R1"
+"legacy_source" = "v2_synthetic_cbam/v22_weather/metadata/ME_R1_expected_sample.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v22_weather/metadata/ME_R1_expected_sample.csv"
+"sha256" = "b0ecb191772122a7e4c282a456dc530073b5d335be491e2538f78b3f93aeb1dd"
+"bytes" = 112334
+"role" = "frozen_sample_membership"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 4320
+"columns" = ["timestamp_utc"]
+
+[[files]]
+"id" = "sample_ME_F"
+"legacy_source" = "v2_synthetic_cbam/v23/metadata/ME_F_expected_sample.csv"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v23/metadata/ME_F_expected_sample.csv"
+"sha256" = "b658de75c7728b098282a682572eafef8ef387920e02d37c1f01d6c961f1cecb"
+"bytes" = 484784
+"role" = "frozen_sample_membership"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 18645
+"columns" = ["timestamp_utc"]
+
+[[files]]
+"id" = "weather_semantics"
+"legacy_source" = "v2_synthetic_cbam/v23/metadata/weather_variable_semantics.json"
+"private_relative_path" = "baselines/v2_synthetic_cbam/v23/metadata/weather_variable_semantics.json"
+"sha256" = "9ab35a33686420a08cd7d25e87f1f56bdd26e7fbba1adff854f82feeed8dd092"
+"bytes" = 12140
+"role" = "frozen_definition"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["status", "product", "official_document", "observed_probe_files", "observed_coordinates", "forecast_step_coordinates", "evidence", "variables", "wind", "alignment", "vintage", "vintage_documentation"]
+
+[[files]]
+"id" = "polynomial_results"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/reporting/results_v3_2_polynomial.json"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/reporting/results_v3_2_polynomial.json"
+"sha256" = "3857fbffc63e817ae9aea88e23cf9e6698ba9076ed9741ec18f3bc854b7437a9"
+"bytes" = 3239759
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["patch", "reference_url", "design", "input_sha256", "baseline_results_sha256", "models", "stages", "baseline_checks", "not_estimated"]
+"model_records" = 90
+"not_estimated_records" = 15
+
+[[files]]
+"id" = "polynomial_catalog"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_ALL_MODELS.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_ALL_MODELS.csv"
+"sha256" = "856f488d8bedab785cd8f5865ef84c543e7b15a120c690df6325d11d1a07b1eb"
+"bytes" = 46109
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 90
+"columns" = ["model_id", "corridor", "destination_zone", "cutoff", "cutoff_year", "bandwidth_days", "polynomial_order", "family", "tau", "se", "ci_low", "ci_high", "p_value", "N", "N_pre", "N_post", "kernel", "HAC", "hour_FE", "weekday_FE", "weather_controls", "rank", "number_of_regressors", "condition_number", "weighted_R2", "sample_hash", "weight_hash", "code_hash", "status", "covariance_status", "functional_form_status"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "polynomial_not_estimated"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_PLACEBO_2024_STATUS.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_PLACEBO_2024_STATUS.csv"
+"sha256" = "5b833776bb3d7a17ee8f8ce33995a25000516c54a244388500b2807e7c364531"
+"bytes" = 1766
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 15
+"columns" = ["model_id", "corridor", "polynomial_order", "cutoff", "status", "detail"]
+"primary_key" = ["model_id"]
+
+[[files]]
+"id" = "polynomial_coefficients"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_ALL_COEFFICIENTS.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_ALL_COEFFICIENTS.csv"
+"sha256" = "b0415e0dbef28ec388f2eb6514122c02019fb7865f275d7bd8ba2d115f1dcbcd"
+"bytes" = 175404
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 2715
+"columns" = ["model_id", "term", "coefficient", "se"]
+
+[[files]]
+"id" = "polynomial_numerical_qa"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_NUMERICAL_QA.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_NUMERICAL_QA.csv"
+"sha256" = "4ee8deab0f5d729e0964f794330c5125b2b92429d07648b108a1920077480d04"
+"bytes" = 41223
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 90
+"columns" = ["model_id", "corridor", "bandwidth_days", "polynomial_order", "family", "cutoff_year", "rank", "number_of_regressors", "condition_number", "raw_condition_number", "weighted_R2", "N", "N_pre", "N_post", "sample_hash", "weight_hash", "covariance_status", "covariance_min_eigenvalue", "raw_scaled_tau_difference", "raw_scaled_max_fitted_difference", "qr_max_coefficient_difference", "cutoff_prediction_tau_difference", "status", "functional_form_status", "flags", "hourly_negative_fitted_N", "ci_width_ratio_to_p1", "turning_points_N"]
+
+[[files]]
+"id" = "polynomial_linear_qa"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_LINEAR_REPLICATION_QA.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_LINEAR_REPLICATION_QA.csv"
+"sha256" = "dc276a9beee95e1650fd7c4002c31fb2349b9422f6bb7018e2c8ec23b321da50"
+"bytes" = 1771
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 15
+"columns" = ["model_id", "frozen_model_id", "sample_match", "tau_difference", "se_difference", "max_full_coefficient_difference", "status"]
+
+[[files]]
+"id" = "polynomial_endpoints"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_ENDPOINT_DIAGNOSTICS.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_ENDPOINT_DIAGNOSTICS.csv"
+"sha256" = "2c8a89494a66378d8574ae03f64cdcc794fad240cfc4bb058eeda574598c7866"
+"bytes" = 17508
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 180
+"columns" = ["model_id", "side", "fitted", "se", "extreme", "adjusted_observed_min", "adjusted_observed_max"]
+
+[[files]]
+"id" = "polynomial_turning_points"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_TURNING_POINTS.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_TURNING_POINTS.csv"
+"sha256" = "c2442366d49e168b7db89afcd97ec093fbe05098d90f3f7b303f7741ced83398"
+"bytes" = 13883
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 121
+"columns" = ["model_id", "side", "r_days", "z", "local_N", "local_effective_N", "mean_weight", "weak_support", "endpoint_region"]
+
+[[files]]
+"id" = "polynomial_functional_form"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_FUNCTIONAL_FORM_SUMMARY.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/tables/V3_2_FUNCTIONAL_FORM_SUMMARY.csv"
+"sha256" = "62d5ccf7e239a0acd9dd9a30f62409a88aaf38812e66a0c6b001fb9531cb7eb7"
+"bytes" = 1445
+"role" = "frozen_benchmark"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 15
+"columns" = ["corridor", "cutoff_year", "family", "sign_stable", "relative_range", "classification", "cubic_se_ratio"]
+
+[[files]]
+"id" = "source_0"
+"legacy_source" = "v3_formal_cbam/config/design.json"
+"private_relative_path" = "baselines/v3_formal_cbam/config/design.json"
+"sha256" = "fcfdc4d0a5a51c3ff516f7fb6f6c800cf4facdc5a125714ac5e495445a9166e0"
+"bytes" = 2474
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "json"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"json_root_type" = "dict"
+"required_top_level_keys" = ["version", "status", "targets", "benchmark", "timezone", "cutoff", "window_utc_start_inclusive", "window_utc_end_exclusive", "last_delivery_start_local", "weight_train", "weight_validation", "weight_refit", "lambdas", "main_lambda", "fit_threshold", "threshold_status", "bandwidth_days", "main_bandwidth", "donut_days", "hac_elapsed_hours", "outcomes", "rdit_fe", "same_season_fe", "same_season_alternative_fe", "drop_feb29_main", "same_season_clock_end_exclusive", "support", "nonlinear", "weather_specs", "weather_status", "placebo_years", "placebo_2025_weights", "bootstrap", "forecast_or_causal_claim", "post_average_gap", "capacity", "normalised_outcome_models", "v3_version", "formal_actuals", "formal_target", "formal_donors", "basic_rdit_addition"]
+
+[[files]]
+"id" = "source_1"
+"legacy_source" = "v3_formal_cbam/src/reused/REUSE_PROVENANCE.csv"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/REUSE_PROVENANCE.csv"
+"sha256" = "6b871f11d86fe4ccd100205fb3be1423aadcb2cab726935a7c8c71ad451f33c5"
+"bytes" = 2984
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "csv"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+"rows" = 10
+"columns" = ["old_path", "new_path", "source_sha256", "copied_sha256", "action", "reason"]
+
+[[files]]
+"id" = "source_2"
+"legacy_source" = "v3_formal_cbam/src/variables.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/variables.py"
+"sha256" = "4ab741b128cdc0b3f536e0bde58ac893c294c0fbf310195de2b7c8afcbde211a"
+"bytes" = 775
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_3"
+"legacy_source" = "v3_formal_cbam/src/rdit.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/rdit.py"
+"sha256" = "3f63785036157769d7f4f6a58e030ba46c8dd4b8e98bb47e7009383e3e98074a"
+"bytes" = 1822
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_4"
+"legacy_source" = "v3_formal_cbam/src/compute.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/compute.py"
+"sha256" = "25a37cac82b0fef6ca62fa56c1eae062e25777e01373b5dbcecba9dc46dd219b"
+"bytes" = 20498
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_5"
+"legacy_source" = "v3_formal_cbam/src/validation.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/validation.py"
+"sha256" = "7e115082dbcfed1c8014c9a95a0981624f243f6831abcb65ef18ff52abb8e8e1"
+"bytes" = 7944
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_6"
+"legacy_source" = "v3_formal_cbam/src/data_processing.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/data_processing.py"
+"sha256" = "8d5cd235ea11ef19546e271a3a65930a8d5ec0d07801ae4c5df54e70e427934c"
+"bytes" = 7916
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_7"
+"legacy_source" = "v3_formal_cbam/v3_1_final_patch/src/synthetic_method_summary.py"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_1_final_patch/src/synthetic_method_summary.py"
+"sha256" = "1e52e3fb80d0954b8aceabb08b4b66f4d5f561c224175c4a1fc0c95368a3dc64"
+"bytes" = 30112
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_8"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/src/common.py"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/src/common.py"
+"sha256" = "3f33fe8eaaf6ec91c537326c7bcefea8e43ca3b7f4332379a22a579fb4983d80"
+"bytes" = 3948
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_9"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/src/estimate.py"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/src/estimate.py"
+"sha256" = "68ce64b58bb42011b6e84f9c9ebe5096602168a7dfa90a81946366be51deab04"
+"bytes" = 17521
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_10"
+"legacy_source" = "v3_formal_cbam/v3_2_polynomial_rdit/src/validate.py"
+"private_relative_path" = "baselines/v3_formal_cbam/v3_2_polynomial_rdit/src/validate.py"
+"sha256" = "74547df339b558ef45bdeb51739293eb1bb0617613de82b26cf85eb4f5f9151d"
+"bytes" = 6772
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_11"
+"legacy_source" = "v3_formal_cbam/src/reused/common.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/common.py"
+"sha256" = "9dd2bf64bd142ce185bedc7b4b55200cc7cc40a007684362a08c27f860d20100"
+"bytes" = 2250
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_12"
+"legacy_source" = "v3_formal_cbam/src/reused/design.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/design.py"
+"sha256" = "6c2b3046ad82aa01db60dd7bf25ee8e2756492d4d1af974a5d54b67bf2bbe302"
+"bytes" = 2894
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_13"
+"legacy_source" = "v3_formal_cbam/src/reused/estimators.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/estimators.py"
+"sha256" = "d56d67d0181c25dab02a1a93a2adb506389ff7463edce026b0dd592d5a2f6678"
+"bytes" = 4212
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_14"
+"legacy_source" = "v3_formal_cbam/src/reused/empirical.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/empirical.py"
+"sha256" = "49f29d4936e350454e401a9f7d77e2b9946221244992cbf131b50c41597a3956"
+"bytes" = 13414
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_15"
+"legacy_source" = "v3_formal_cbam/src/reused/weather_audit.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/weather_audit.py"
+"sha256" = "94ed7acbda3509d458d684244413e41f3ab5f3c9bd9ca78f0876a19c2aaa1951"
+"bytes" = 13788
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_16"
+"legacy_source" = "v3_formal_cbam/src/reused/weather_models.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/weather_models.py"
+"sha256" = "adb422351bf36a366cc5ff338c1b2a917a6e150427a92633251ad9dd97290f97"
+"bytes" = 15228
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_17"
+"legacy_source" = "v3_formal_cbam/src/reused/weather_synthetic.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/weather_synthetic.py"
+"sha256" = "fc6ebb351603908cfba4300e0d88e01b2750fcd640b9dd92ce91f7a6e0c5eff2"
+"bytes" = 11098
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_18"
+"legacy_source" = "v3_formal_cbam/src/reused/synthetic_me.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/synthetic_me.py"
+"sha256" = "f2204a1b12ac720ed15a91b1e58e63b0f41c2893142ba984894957967d675a33"
+"bytes" = 18637
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_19"
+"legacy_source" = "v3_formal_cbam/src/reused/weight_learning.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/weight_learning.py"
+"sha256" = "c61d0fcd77be8702b6f5f149046a2962e9b6299cde6c047408cf7464a64b3a49"
+"bytes" = 38399
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_20"
+"legacy_source" = "v3_formal_cbam/src/reused/native_data.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/native_data.py"
+"sha256" = "396dca4f4752e36f74fda46984ec9e20898d1bfc4ea9f1348538b73a20790b5b"
+"bytes" = 24379
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_21"
+"legacy_source" = "v3_formal_cbam/src/reused/official_prices.py"
+"private_relative_path" = "baselines/v3_formal_cbam/src/reused/official_prices.py"
+"sha256" = "ea4c652be63e2aa13062556384f1e5b03427d5beff94bf14f6d70997b2e5dece"
+"bytes" = 5223
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "py"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_22"
+"legacy_source" = "CODEX_DATA_HANDOFF.md"
+"private_relative_path" = "baselines/CODEX_DATA_HANDOFF.md"
+"sha256" = "0e7e99c5662e06a82b105f41a38b3600984fde517ca92478ee831fe742d9d06a"
+"bytes" = 38088
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "md"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"
+
+[[files]]
+"id" = "source_23"
+"legacy_source" = "GITHUB_REFACTOR_PLAN.md"
+"private_relative_path" = "baselines/GITHUB_REFACTOR_PLAN.md"
+"sha256" = "fbe00f92d46c7f86ca12cf35c5ed33f58e8f254c2f6688acce35fe0cb4fa53a9"
+"bytes" = 63634
+"role" = "read_only_source_evidence"
+"required" = true
+"read_only" = true
+"license_status" = "UNVERIFIED_NOT_APPROVED_FOR_PUBLICATION"
+"release_policy" = "PRIVATE_ONLY"
+"format" = "md"
+"verification" = "SHA256_EXACT_NO_AUTO_UPDATE"

@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using this metadata."
+type: software
+title: "Montenegro–Italy Electricity Trade Around the EU CBAM"
+version: 0.1.0rc1
+authors:
+  - family-names: Zhu
+    given-names: Hona
+    affiliation: Stockholm School of Economics
+license: MIT
+abstract: >-
+  A coursework demonstration for Natural Resource and Energy Economics at
+  Stockholm School of Economics, combining electricity market data engineering,
+  spatial weather aggregation, RDiT, HAC inference and fixed-weight synthetic
+  comparisons. Author: Hona Zhu. Contributors, in contribution order:
+  Mohammad Amir, Jasper Wu, and John Sirin. Public examples use artificial data;
+  empirical inputs and results are not distributed. The MIT licence covers
+  original project software and original teaching materials, not third-party data.
+keywords:
+  - energy economics
+  - electricity trade
+  - geospatial data
+  - reproducible research
+  - CBAM

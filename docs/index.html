@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer"><meta name="cbam-source-sha256" content="5bd7f8e5fbf07393303b15fea909ca7356dd55a5e8e0eb779708bd40a618fb27"><meta name="cbam-generator-sha256" content="d3e9a9b705d9f31e148938d805dca9905e0fb36274474922300888f9aa09d8e2"><meta name="cbam-binding-sha256" content="29463afad39f01bd493000fe3c80ca7469d781590c657c42ddd4191f502da0b0"><title>Montenegro–Italy Electricity Trade Around the EU CBAM · CBAM power research</title><style>:root{color-scheme:light;--ink:#18354a;--muted:#536a79;--teal:#126c78;--paper:#fbfaf7;--line:#d7e1e6}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1rem}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.72}
+a{color:var(--teal);text-decoration-thickness:.08em;text-underline-offset:.18em}a:hover{color:#093e48}a:focus-visible,summary:focus-visible,.equation:focus-visible{outline:3px solid #b97f2b;outline-offset:4px}
+.skip{position:absolute;left:1rem;top:-5rem;background:white;padding:.6rem;z-index:9}.skip:focus{top:1rem}
+.masthead{border-top:5px solid var(--teal);background:#eef4f5;border-bottom:1px solid var(--line)}.masthead-inner{max-width:1320px;margin:auto;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}.brand{font-size:.82rem;letter-spacing:.14em;font-weight:700;text-transform:uppercase}.utility{display:flex;gap:1.1rem;font-size:.86rem;flex-wrap:wrap}
+.layout{max-width:1320px;margin:auto;display:grid;grid-template-columns:245px minmax(0,1fr);gap:3.6rem;padding:2.8rem 2rem 4rem}.contents{align-self:start;position:sticky;top:1.2rem;max-height:calc(100vh - 2.4rem);overflow:auto;font-size:.85rem;line-height:1.5;border-right:1px solid var(--line);padding-right:1.3rem}.contents summary{font-weight:700;cursor:pointer;list-style:none;margin-bottom:.9rem}.contents ol{list-style:none;padding:0;margin:0}.contents li{margin:.65rem 0}.contents a{text-decoration:none;color:var(--muted)}.contents a:hover{text-decoration:underline;color:var(--teal)}
+main{min-width:0;max-width:945px}h1,h2,h3{line-height:1.22;letter-spacing:-.025em;color:var(--ink)}h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:500;margin:0 0 1.5rem;max-width:22ch}h2{font-size:1.65rem;margin:3rem 0 1rem;padding-top:1.2rem;border-top:1px solid var(--line)}h3{font-size:1.16rem;margin:1.8rem 0 .8rem}p{margin:.9rem 0 1.2rem}main>p:first-of-type{font-size:1.12rem;color:#37576f}blockquote{margin:1.4rem 0;padding:.1rem 1.2rem;border-left:4px solid var(--teal);background:#edf5f4}blockquote p{margin:.7rem 0}
+figure{margin:1.8rem 0 2rem;background:white;border:1px solid var(--line);border-radius:8px;overflow:hidden}figure img{display:block;width:100%;height:auto}figcaption{padding:1.1rem 1.3rem;font-size:.86rem;line-height:1.65;border-top:1px solid var(--line);color:var(--muted)}figcaption strong:first-child{color:var(--ink)}.figure-source{display:block;font-size:.73rem;margin-top:.5rem;overflow-wrap:anywhere}.figure-source a{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.table-wrap{overflow-x:auto;margin:1.4rem 0;border:1px solid var(--line);border-radius:6px}table{width:100%;border-collapse:collapse;font-size:.87rem;line-height:1.55}th,td{text-align:left;vertical-align:top;padding:.8rem .9rem;border-bottom:1px solid var(--line)}th{background:#edf3f5;font-weight:650}tr:last-child td{border-bottom:0}td:first-child{min-width:9rem}td p{margin:.2rem 0}.api-table td:first-child{min-width:12rem}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em}code{background:#edf1f3;padding:.12em .25em;border-radius:3px;overflow-wrap:anywhere}pre{background:#eff3f5;padding:1.1rem 1.2rem;overflow-x:auto;border-radius:6px;line-height:1.6}pre code{padding:0;background:transparent;overflow-wrap:normal}
+.equation{overflow-x:auto;max-width:100%;padding:1rem .3rem;margin:1.3rem 0;background:#fff;border-radius:6px}math{font-family:"STIX Two Math","Cambria Math",serif;font-size:1.08em}math[display=block]{margin:.35rem auto}math[display=inline]{vertical-align:baseline}li{margin:.35rem 0}hr{border:0;border-top:1px solid var(--line);margin:2rem 0}
+.build-record{font-size:.78rem;color:var(--muted);margin-top:3rem;border-top:1px solid var(--line);padding-top:1rem}.build-record summary{cursor:pointer;font-weight:600}.build-record dd{margin:.2rem 0 .8rem;overflow-wrap:anywhere}.footer{border-top:1px solid var(--line);padding:1.5rem 2rem;text-align:center;color:var(--muted);font-size:.82rem}
+@media(max-width:1000px){.layout{grid-template-columns:1fr;gap:1.8rem;max-width:900px}.contents{position:static;max-height:none;border:1px solid var(--line);padding:1rem 1.2rem;border-radius:6px}.contents ol{columns:2;column-gap:2rem}.contents li{break-inside:avoid}.contents summary{margin-bottom:.3rem}main{max-width:none}}
+@media(max-width:560px){body{font-size:16px}.layout{padding:1.5rem 1rem 2.5rem}.masthead-inner{padding:1rem}.utility{gap:.8rem}h1{font-size:2.25rem}h2{font-size:1.4rem;margin-top:2.2rem}.contents ol{columns:1;max-height:10rem;overflow:auto}.contents summary:after{content:" · scroll sections";font-weight:400;color:var(--muted);font-size:.8rem}.contents li{margin:.4rem 0}figcaption{padding:.9rem;font-size:.82rem}th,td{padding:.65rem}.equation{font-size:.93rem}}
+@media print{.masthead,.contents,.footer,.build-record,.skip{display:none}.layout{display:block;padding:0;max-width:none}main{max-width:none}body{background:white;color:black;font-size:10pt}h2,figure,table{break-inside:avoid}a{color:inherit}figure img{max-height:20cm;object-fit:contain}h1{font-size:26pt}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}</style></head><body><a class="skip" href="#main">Skip to research narrative</a><header class="masthead"><div class="masthead-inner"><span class="brand">CBAM · Electricity research</span><nav class="utility" aria-label="Repository resources"><a href="../README.md">Repository guide</a><a href="methodology.md">Markdown source</a><a href="data_access.md">Data access</a></nav></div></header><div class="layout"><aside class="contents"><details open><summary>In this guide</summary><nav aria-label="Research sections"><ol><li><a href="#1-the-presentation-s-research-question-and-three-branches">1. The presentation&#x27;s research question and three branches</a></li><li><a href="#2-market-variables-sources-and-inherited-inputs">2. Market variables, sources and inherited inputs</a></li><li><a href="#3-era5-spatial-and-temporal-construction">3. ERA5 spatial and temporal construction</a></li><li><a href="#4-estimands-and-rdit-design">4. Estimands and RDiT design</a></li><li><a href="#5-estimation-hac-and-joint-covariance">5. Estimation, HAC and joint covariance</a></li><li><a href="#6-fixed-weight-montenegro-synthetic-benchmark">6. Fixed-weight Montenegro synthetic benchmark</a></li><li><a href="#7-polynomial-robustness-and-preserved-model-coverage">7. Polynomial robustness and preserved model coverage</a></li><li><a href="#8-reproducibility-verification-and-publication-boundaries">8. Reproducibility, verification and publication boundaries</a></li><li><a href="#9-where-the-implementation-came-from">9. Where the implementation came from</a></li><li><a href="#10-learn-the-methods-and-inspect-the-prototype-api">10. Learn the methods and inspect the prototype API</a></li><li><a href="#11-authorship-reproducible-reading-and-reuse">11. Authorship, reproducible reading and reuse</a></li></ol></nav></details></aside><main id="main"><h1 id="montenegro-italy-electricity-trade-around-the-eu-cbam">
+Montenegro–Italy Electricity Trade Around the EU CBAM</h1>
+<p>
+An illustrated guide to the existing research design: electricity-market measurement, local discontinuities, a frozen synthetic benchmark and bilateral weather controls.</p>
+<p>
+This page documents the research design already developed for the project presentation, <em>EU-CBAM and Electricity Imports</em> (<code>5324 Project Presentation v1014</code>, especially slides 5 and 7–13), and explained in the private V3 empirical teaching report. Its reading order follows that work: hypotheses, flow construction, weather aggregation, Basic/calendar/weather RDiT, then the synthetic benchmark and gap. Those documents inform the narrative; their empirical values and original graphics are not reproduced here. This Markdown file is the maintained source for the offline research website.</p>
+<p>
+<strong>V3 is the formal empirical baseline.</strong> V3.1 adds presentation; V3.2 adds polynomial robustness. V2F supplies historical verification references. Earlier versions supply explicitly identified frozen upstream inputs. The documentation connects the presentation to those frozen definitions; it does not introduce a new research design or change the hierarchy.</p>
+<p>
+The authoritative contracts are <a href="../config/main.toml"><code>config/main.toml</code></a>, <a href="../config/polynomial.toml"><code>config/polynomial.toml</code></a> and <a href="../manifests/baselines.toml"><code>manifests/baselines.toml</code></a>. The figures here are original schematics or artificial examples. They contain no empirical estimates, frozen donor weights or real boundary geometry.</p>
+<h2 id="1-the-presentation-s-research-question-and-three-branches">
+1. The presentation's research question and three branches</h2>
+<p>
+CO₂ emissions create a negative externality when their social cost is not reflected in market prices. Carbon pricing can affect dispatch and import incentives. CBAM links covered imports to a carbon cost associated with embedded emissions, with certificate prices tied to the EU ETS and provisions recognizing carbon prices already paid abroad. Electricity is included; the definitive regime starts on 1 January 2026. This institutional date fixes the research cutoff. It does not establish that every corridor has the same regulatory exposure. <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-definitive-regime_en" rel="noreferrer noopener">European Commission, definitive regime</a></p>
+<p>
+The presentation asks whether CBAM reduces carbon-intensive electricity imports from non-EU countries. It develops two hypotheses: a fall in Montenegro-to-Italy imports around implementation, and reduced responsiveness of imports to price spreads as arbitrage becomes less attractive. The observed outcome is positive-part commercial net flow, not measured hourly carbon content. Demand, renewable availability, hydro conditions, transmission constraints and other contemporaneous events can also change trade. A local discontinuity is therefore distinct from a sustained annual change or an identified carbon-emissions effect.</p>
+<p>
+The report motivates these hypotheses with an importer's stylized arbitrage margin:</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="m_t=P^{destination}_t-P^{origin}_t-c^{capacity}_t-c^{loss}_t-c^{balancing}_t-c^{carbon}_t,
+\qquad \max_{0\leq q_t\leq K_t}\{q_tm_t-C(q_t)\}." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>m</mi><mi>t</mi></msub><mo>&#x0003D;</mo><msubsup><mi>P</mi><mi>t</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>P</mi><mi>t</mi><mrow><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>c</mi><mi>t</mi><mrow><mi>c</mi><mi>a</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>i</mi><mi>t</mi><mi>y</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>c</mi><mi>t</mi><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>s</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>c</mi><mi>t</mi><mrow><mi>b</mi><mi>a</mi><mi>l</mi><mi>a</mi><mi>n</mi><mi>c</mi><mi>i</mi><mi>n</mi><mi>g</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>c</mi><mi>t</mi><mrow><mi>c</mi><mi>a</mi><mi>r</mi><mi>b</mi><mi>o</mi><mi>n</mi></mrow></msubsup><mo>&#x0002C;</mo><mspace width="2em" /><msub><mo>max</mo><mrow><mn>0</mn><mo>&#x02264;</mo><msub><mi>q</mi><mi>t</mi></msub><mo>&#x02264;</mo><msub><mi>K</mi><mi>t</mi></msub></mrow></msub><mo stretchy="false">&#x0007B;</mo><msub><mi>q</mi><mi>t</mi></msub><msub><mi>m</mi><mi>t</mi></msub><mo>&#x02212;</mo><mi>C</mi><mo stretchy="false">&#x00028;</mo><msub><mi>q</mi><mi>t</mi></msub><mo stretchy="false">&#x00029;</mo><mo stretchy="false">&#x0007D;</mo><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+A higher carbon-related cost can reduce the margin at a given price spread, while a wider spread or changing constraints can offset it. Here <math aria-label="q_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>q</mi><mi>t</mi></msub></mrow></math> is the import decision and <math aria-label="K_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>K</mi><mi>t</mi></msub></mrow></math> available capacity. The cost terms and complete hourly availability are not observed well enough to estimate this as a structural model. It explains why flows might respond; it is not an additional fitted equation.</p>
+<figure id="figure-1"><img src="figures/workflow.svg" alt="The existing research design, expressed as three linked analytical branches" loading="lazy" decoding="async" /><figcaption><strong>Figure 1. The existing three-branch research design.</strong> <strong>Units:</strong> methodological stages; MW for the flow and gap outcomes. <strong>Interpretation:</strong> follow actual-corridor RDiT, the historical synthetic learning/validation sequence, and the ERA5-to-weather-control branch. <strong>Provenance:</strong> original schematic redrawing the presentation's research logic and reconciling it with frozen source definitions. <strong>Limits:</strong> arrows show analytical dependencies, not causal identification or empirical effects; weight learning is historical and is not rerun by reproduction.<span class="figure-source">Source: <a href="figures/workflow.svg">docs/figures/workflow.svg</a> · SHA-256 33728a990fdef5a1c8d8aab70e78be16ad89a6d841acb2c44a1875632bf4107d</span></figcaption></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Existing research branch</th>
+<th>
+Presentation sequence</th>
+<th>
+Frozen implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Actual-corridor RDiT</td>
+<td>
+Commercial net exports → local RDiT → Basic and calendar fixed effects</td>
+<td>
+Hourly positive net-flow outcome; common cutoff, trends, kernel and HAC conventions</td>
+</tr>
+<tr>
+<td>
+Synthetic comparison</td>
+<td>
+Corridor matching → 2024 weight learning → 2025 validation → synthetic relative gap</td>
+<td>
+Frozen Greece/Austria donors; separate validation and final weight versions; actual-minus-synthetic gap RDiT</td>
+</tr>
+<tr>
+<td>
+Bilateral weather</td>
+<td>
+ERA5 grid → area intersections → regional hourly variables → bilateral controls → weather-adjusted RDiT</td>
+<td>
+Frozen geographic weights, cell-level conversions and delivery-hour alignment; paired A/B/C comparisons</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+The implementation details below make those existing steps explicit. Same-season F1/F2 and polynomial checks retain their existing supporting roles; they are not replacements for the presentation's local design.</p>
+<h3 id="presentation-terminology-and-code-crosswalk">
+Presentation terminology and code crosswalk</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Presentation wording</th>
+<th>
+Precise meaning used here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Electricity imports / net exports</td>
+<td>
+Origin-to-Italy positive-part <strong>hourly commercial net flow</strong>; the same corridor viewed from the destination or origin. It is not gross imports.</td>
+</tr>
+<tr>
+<td>
+ENTSO-E flow data</td>
+<td>
+ENTSO-E upstream provenance, accessed through the exact frozen <strong>Energy-Charts Italy-reporter mirror files</strong>; no independent direct ENTSO-E acquisition is claimed.</td>
+</tr>
+<tr>
+<td>
+“ESA Copernicus ERA5”</td>
+<td>
+<strong>Copernicus/ECMWF ERA5</strong>. “ESA” is corrected as a presentation attribution error.</td>
+</tr>
+<tr>
+<td>
+Calendar FE; “Hour-of-Date”</td>
+<td>
+<strong>Hour-of-day and weekday fixed effects</strong>, using the Rome calendar.</td>
+</tr>
+<tr>
+<td>
+“Weather FE”</td>
+<td>
+Bilateral <strong>continuous weather controls</strong> and their specified nonlinear terms, not a new weather fixed-effect classification.</td>
+</tr>
+<tr>
+<td>
+Synthetic “relative gap”</td>
+<td>
+<math aria-label="G_t=Y^{ME}_t-Y^{syn}_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>G</mi><mi>t</mi></msub><mo>&#x0003D;</mo><msubsup><mi>Y</mi><mi>t</mi><mrow><mi>M</mi><mi>E</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>Y</mi><mi>t</mi><mrow><mi>s</mi><mi>y</mi><mi>n</mi></mrow></msubsup></mrow></math> in <strong>MW</strong>. It is a level difference, not a ratio or percentage-normalized gap.</td>
+</tr>
+<tr>
+<td>
+2024 learning → 2025 validation</td>
+<td>
+<code>GY050_train2024</code> provides that validation path; <code>GY050_final</code> separately uses historical 2024–2025 learning. Final weights must not be described as the 2024-only validation weights.</td>
+</tr>
+<tr>
+<td>
+Alternative bandwidth “12 days” on slide 21</td>
+<td>
+The frozen V3 contract and estimator use <strong>14 days</strong>, alongside 30/60/90/180. The slide shorthand does not change the specification.</td>
+</tr>
+<tr>
+<td>
+<math aria-label="\tau_G=\tau_{ME}-\tau_{syn}" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>&#x003C4;</mi><mi>G</mi></msub><mo>&#x0003D;</mo><msub><mi>&#x003C4;</mi><mrow><mi>M</mi><mi>E</mi></mrow></msub><mo>&#x02212;</mo><msub><mi>&#x003C4;</mi><mrow><mi>s</mi><mi>y</mi><mi>n</mi></mrow></msub></mrow></math></td>
+<td>
+A linear-estimator identity only under the same sample, design and weights. The gap is directly regressed and joint covariance retained; weather branches do not impose this identity on differing designs.</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+Where a simplified slide label and frozen source differ, the verified source/configuration controls the computation. The presentation's qualitative results and discussion motivate interpretation, but this public teaching documentation does not reproduce empirical numerical claims or promote them into stronger causal conclusions.</p>
+<figure id="figure-2"><img src="figures/corridors.svg" alt="Schematic of the five analyzed origin-to-Italian-zone corridors, with Montenegro highlighted" loading="lazy" decoding="async" /><figcaption><strong>Figure 2. Geography of the analysis, shown schematically.</strong> <strong>Units:</strong> country and bidding-zone identifiers; arrows have no quantitative scale. <strong>Interpretation:</strong> Montenegro is matched to IT-CSUD, Greece to IT-SUD, and Austria/Switzerland/Slovenia to IT-NORD; donor tags denote membership only. <strong>Provenance:</strong> original diagram from frozen corridor assignments, with no third-party boundary geometry. <strong>Limits:</strong> positions and line lengths are not geographic, and the figure contains no capacities, donor weights or observed trade.<span class="figure-source">Source: <a href="figures/corridors.svg">docs/figures/corridors.svg</a> · SHA-256 607fa9970da3c11285f54270bae3c0a4791b98c0fde267fcc5674d73ee3e4e8b</span></figcaption></figure>
+<h2 id="2-market-variables-sources-and-inherited-inputs">
+2. Market variables, sources and inherited inputs</h2>
+<p>
+The five formal actual corridors are Austria, Switzerland, Slovenia, Greece and Montenegro into Italy. Austria/Switzerland/Slovenia use IT-NORD destination prices and weather, Greece uses IT-SUD, and Montenegro uses IT-CSUD. France is outside the formal actual-corridor set. Switzerland's synthetic branch remains blocked.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Input</th>
+<th>
+Frozen construction and lineage</th>
+<th>
+Package entry point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Commercial and physical flows</td>
+<td>
+Italy-reporter Energy-Charts archives with ENTSO-E upstream provenance; positive signed flow is into Italy; GW converted to MW</td>
+<td>
+<a href="../src/cbam_power/market.py"><code>market.py</code></a></td>
+</tr>
+<tr>
+<td>
+Destination prices</td>
+<td>
+Corridor bidding-zone prices, not PUN. AT/CH/ME retain frozen V1 GME destination values; the IT-CSUD mirror served validation, not gap filling. SI/GR use the selected GME archives</td>
+<td>
+<a href="../src/cbam_power/panel.py"><code>panel.py</code></a>, <a href="../src/cbam_power/market.py"><code>market.py</code></a></td>
+</tr>
+<tr>
+<td>
+Origin prices</td>
+<td>
+AT/CH/ME values inherited from the frozen V1 panel; SI uses its frozen Energy-Charts mirror then SMARD gap fill; GR uses frozen HEnEx then its Energy-Charts mirror</td>
+<td>
+<a href="../src/cbam_power/panel.py"><code>panel.py</code></a></td>
+</tr>
+<tr>
+<td>
+Generation mix</td>
+<td>
+Frozen Eurostat <code>nrg_cb_pem</code> monthly net generation, complete-year checks and retained fuel definitions</td>
+<td>
+<a href="../src/cbam_power/synthetic.py"><code>synthetic.py</code></a></td>
+</tr>
+<tr>
+<td>
+Weather</td>
+<td>
+Frozen ERA5 NetCDF, requests, geography masks and intersection weights</td>
+<td>
+<a href="../src/cbam_power/weather.py"><code>weather.py</code></a></td>
+</tr>
+<tr>
+<td>
+Synthetic weights</td>
+<td>
+All 16 original ME versions, read from the full-precision frozen CSV</td>
+<td>
+<a href="../src/cbam_power/synthetic.py"><code>synthetic.py</code></a></td>
+</tr>
+</tbody>
+</table></div>
+<p>
+Provider references are <a href="https://api.energy-charts.info/" rel="noreferrer noopener">Energy-Charts</a>, <a href="https://www.mercatoelettrico.org/" rel="noreferrer noopener">GME</a>, <a href="https://www.enexgroup.gr/" rel="noreferrer noopener">HEnEx</a>, <a href="https://www.smard.de/en" rel="noreferrer noopener">SMARD</a> and <a href="https://ec.europa.eu/eurostat/web/products-datasets/-/nrg_cb_pem" rel="noreferrer noopener">Eurostat net generation</a>. These links identify sources; they are not blanket redistribution permissions. File-level provenance and acquisition identities live in <a href="../manifests/inputs.toml"><code>inputs.toml</code></a>; permission exceptions are documented in <a href="data_access.md">data access</a>.</p>
+<p>
+For native intervals <math aria-label="j" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>j</mi></mrow></math> within delivery hour <math aria-label="t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>t</mi></mrow></math>, signed hourly power and energy are</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="N_t=\frac{1}{60}\sum_j N_j\Delta m_j,
+\qquad E_t=\sum_j N_j\frac{\Delta m_j}{60}." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>N</mi><mi>t</mi></msub><mo>&#x0003D;</mo><mfrac><mrow><mn>1</mn></mrow><mrow><mn>60</mn></mrow></mfrac><munder><mo>&#x02211;</mo><mi>j</mi></munder><msub><mi>N</mi><mi>j</mi></msub><mi>&#x00394;</mi><msub><mi>m</mi><mi>j</mi></msub><mo>&#x0002C;</mo><mspace width="2em" /><msub><mi>E</mi><mi>t</mi></msub><mo>&#x0003D;</mo><munder><mo>&#x02211;</mo><mi>j</mi></munder><msub><mi>N</mi><mi>j</mi></msub><mfrac><mrow><mi>&#x00394;</mi><msub><mi>m</mi><mi>j</mi></msub></mrow><mrow><mn>60</mn></mrow></mfrac><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+<math aria-label="N_j" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>N</mi><mi>j</mi></msub></mrow></math> is MW and <math aria-label="\Delta m_j" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x00394;</mi><msub><mi>m</mi><mi>j</mi></msub></mrow></math> is observed minutes. Complete 60-minute coverage is required; overlaps are rejected and gaps are not extended. The equal numerical values of hourly average MW and one-hour MWh have different units. The primary outcome is <math aria-label="Y_t=\max(N_t,0)" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>&#x0003D;</mo><mo>max</mo><mo stretchy="false">&#x00028;</mo><msub><mi>N</mi><mi>t</mi></msub><mo>&#x0002C;</mo><mn>0</mn><mo stretchy="false">&#x00029;</mo></mrow></math>, with the positive part applied <strong>after hourly netting</strong>. It is a positive net-export proxy, not gross exports. Signed commercial flow remains a sensitivity outcome; physical flow is kept separately.</p>
+<p>
+The price spread is <math aria-label="S_t=P^{destination}_t-P^{origin}_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>S</mi><mi>t</mi></msub><mo>&#x0003D;</mo><msubsup><mi>P</mi><mi>t</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></msubsup><mo>&#x02212;</mo><msubsup><mi>P</mi><mi>t</mi><mrow><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi></mrow></msubsup></mrow></math> in EUR/MWh. Its centered form subtracts the frozen pre-2026 center. V1 AT/CH/ME observations and their inherited centers retain their actual upstream lineage; the package does not claim to reconstruct that entire historical chain from provider originals.</p>
+<p>
+Delivery-start timestamps are UTC. Calendar variables use Europe/Rome, preserving both DST transitions. The cutoff is <strong>2026-01-01 00:00 Europe/Rome</strong>, or <strong>2025-12-31 23:00 UTC</strong>. The running variable uses the delivery midpoint, 30 minutes after the hourly start. Missing observations are not filled to manufacture a continuous sample.</p>
+<h2 id="3-era5-spatial-and-temporal-construction">
+3. ERA5 spatial and temporal construction</h2>
+<p>
+ERA5 is an ECMWF reanalysis distributed through the Copernicus Climate Data Store. Its hourly single-level product uses a regular 0.25° atmospheric grid; the project's exact frozen NetCDF versions are resolved by content identity. <a href="https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview" rel="noreferrer noopener">ERA5 catalogue and dataset DOI</a></p>
+<p>
+The eight frozen geographic units are AT, CH, SI, GR, ME, IT-NORD, IT-CSUD and IT-SUD. Italian bidding-zone proxies retain the original definitions. For grid cell <math aria-label="C_i" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>C</mi><mi>i</mi></msub></mrow></math> and region <math aria-label="G_g" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>G</mi><mi>g</mi></msub></mrow></math>,</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="w_{ig}=\frac{A(C_i\cap G_g)}{\sum_j A(C_j\cap G_g)},
+\qquad W_{g,t}=\sum_i w_{ig}W_{i,t}." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>w</mi><mrow><mi>i</mi><mi>g</mi></mrow></msub><mo>&#x0003D;</mo><mfrac><mrow><mi>A</mi><mo stretchy="false">&#x00028;</mo><msub><mi>C</mi><mi>i</mi></msub><mo>&#x02229;</mo><msub><mi>G</mi><mi>g</mi></msub><mo stretchy="false">&#x00029;</mo></mrow><mrow><msub><mo>&#x02211;</mo><mi>j</mi></msub><mi>A</mi><mo stretchy="false">&#x00028;</mo><msub><mi>C</mi><mi>j</mi></msub><mo>&#x02229;</mo><msub><mi>G</mi><mi>g</mi></msub><mo stretchy="false">&#x00029;</mo></mrow></mfrac><mo>&#x0002C;</mo><mspace width="2em" /><msub><mi>W</mi><mrow><mi>g</mi><mo>&#x0002C;</mo><mi>t</mi></mrow></msub><mo>&#x0003D;</mo><munder><mo>&#x02211;</mo><mi>i</mi></munder><msub><mi>w</mi><mrow><mi>i</mi><mi>g</mi></mrow></msub><msub><mi>W</mi><mrow><mi>i</mi><mo>&#x0002C;</mo><mi>t</mi></mrow></msub><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+Areas use WGS84 geodesic cell/polygon intersections. The production calculation reads the frozen weights unchanged; independent geometry checks do not replace them. Required cells, coordinates and normalized positive weights must match exactly. Missing weather propagates without renormalizing over the remaining cells.</p>
+<figure id="figure-3"><img src="figures/era5_aggregation.svg" alt="Artificial polygon intersecting a regular grid, with cell-first weather conversion and delivery-time alignment" loading="lazy" decoding="async" /><figcaption><strong>Figure 3. From ERA5 grid cells to delivery-hour weather.</strong> <strong>Units:</strong> production-grid spacing in degrees; regional outputs in °C, m/s, W/m² and mm/hour. <strong>Interpretation:</strong> intersect cells with a frozen geographic mask, convert grid values, aggregate using frozen area weights, and align accumulated variables to delivery start. <strong>Provenance:</strong> original artificial polygon/grid illustration of the implemented method. <strong>Limits:</strong> this is not an actual geography or set of empirical weights; missing cells remain missing rather than receiving redistributed weights.<span class="figure-source">Source: <a href="figures/era5_aggregation.svg">docs/figures/era5_aggregation.svg</a> · SHA-256 6bab455dc450a55d5f738ef7d43e5e32f1905a05aeca728bfbe5a8a7bfbced14</span></figcaption></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Variable</th>
+<th>
+Cell-level conversion</th>
+<th>
+Timestamp rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Temperature</td>
+<td>
+<code>t2m − 273.15</code>, °C</td>
+<td>
+Instantaneous validity time retained</td>
+</tr>
+<tr>
+<td>
+Wind</td>
+<td>
+<code>sqrt(u10² + v10²)</code>, m/s, <strong>before spatial averaging</strong></td>
+<td>
+Instantaneous validity time retained</td>
+</tr>
+<tr>
+<td>
+Solar radiation</td>
+<td>
+<code>ssrd / 3600</code>, W/m² for the preceding hour</td>
+<td>
+Validity time minus one hour</td>
+</tr>
+<tr>
+<td>
+Precipitation</td>
+<td>
+<code>tp × 1000</code>, mm/hour for the preceding hour</td>
+<td>
+Validity time minus one hour</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+Thus opposing winds must not cancel before their speeds are calculated. The accumulated-variable shift aligns an hour-ending ERA5 value with an electricity delivery-start interval; a validity time of 01:00 UTC maps to 00:00 UTC. ECMWF documents this preceding-hour accumulation convention. <a href="https://confluence.ecmwf.int/spaces/CKB/pages/76414402/ERA5+data+documentation" rel="noreferrer noopener">ERA5 data documentation</a></p>
+<p>
+The frozen <code>expver</code> rule prioritizes 1 and uses 5 for missing values where applicable. Deterministic request selection is preserved; sources and revisions are not averaged. The reconstruction retains the lineage of 58 selected request-file relationships across 50 unique content files. Small cross-region differences in overlapping temperature grids remain a recorded source uncertainty; their cause is <strong>UNVERIFIED</strong>, and no smoothing or substitution is used.</p>
+<p>
+Bilateral controls distinguish origin and destination. Local controls are centered on the model's pre-cutoff complete-case reference. Temperature, wind and radiation have linear and quadratic terms; precipitation remains linear. A separate linear-only sensitivity is retained. Arm A uses the original sample without weather, B uses C's complete-case sample without controls, and C adds weather on that same sample. <code>B − A</code> measures sample change and <code>C − B</code> weather adjustment. The main local window has the required bilateral coverage; annual models retain their incomplete-coverage blocks. The V23 sample view and the V2F/V3 native-coverage weather panel are different comparison objects.</p>
+<h2 id="4-estimands-and-rdit-design">
+4. Estimands and RDiT design</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Family</th>
+<th>
+Quantity</th>
+<th>
+Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Local RDiT</td>
+<td>
+<math aria-label="\tau" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003C4;</mi></mrow></math> at the policy cutoff</td>
+<td>
+Local discontinuity conditional on the specified trends and controls</td>
+</tr>
+<tr>
+<td>
+Same-season F1</td>
+<td>
+2026 minus 2025 level contrast</td>
+<td>
+Calendar-adjusted difference over matching portions of the year</td>
+</tr>
+<tr>
+<td>
+Same-season F2</td>
+<td>
+2026 minus 2025 spread-slope contrast</td>
+<td>
+Change in a conditional MW/(EUR/MWh) association</td>
+</tr>
+<tr>
+<td>
+Synthetic gap</td>
+<td>
+Actual ME minus its frozen weighted benchmark</td>
+<td>
+Descriptive deviation from a fixed comparative path</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+These quantities are not interchangeable. In particular, F2 is neither the local RDiT jump nor a causal price elasticity.</p>
+<h3 id="start-with-basic-rdit">
+Start with Basic RDiT</h3>
+<p>
+The Basic specification isolates the local comparison before adding controls:</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="Y_t=\alpha+\tau D_t+\beta r_t+\gamma D_t r_t+\varepsilon_t." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>&#x0003D;</mo><mi>&#x003B1;</mi><mo>&#x0002B;</mo><mi>&#x003C4;</mi><msub><mi>D</mi><mi>t</mi></msub><mo>&#x0002B;</mo><mi>&#x003B2;</mi><msub><mi>r</mi><mi>t</mi></msub><mo>&#x0002B;</mo><mi>&#x003B3;</mi><msub><mi>D</mi><mi>t</mi></msub><msub><mi>r</mi><mi>t</mi></msub><mo>&#x0002B;</mo><msub><mi>&#x003B5;</mi><mi>t</mi></msub><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+The fitted pre-cutoff path is <math aria-label="\alpha+\beta r_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B1;</mi><mo>&#x0002B;</mo><mi>&#x003B2;</mi><msub><mi>r</mi><mi>t</mi></msub></mrow></math>; the post-cutoff path is <math aria-label="(\alpha+\tau)+(\beta+\gamma)r_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x00028;</mo><mi>&#x003B1;</mi><mo>&#x0002B;</mo><mi>&#x003C4;</mi><mo stretchy="false">&#x00029;</mo><mo>&#x0002B;</mo><mo stretchy="false">&#x00028;</mo><mi>&#x003B2;</mi><mo>&#x0002B;</mo><mi>&#x003B3;</mi><mo stretchy="false">&#x00029;</mo><msub><mi>r</mi><mi>t</mi></msub></mrow></math>. Thus <math aria-label="\tau" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003C4;</mi></mrow></math> is the jump in MW, <math aria-label="\beta" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B2;</mi></mrow></math> the pre-cutoff slope in MW/day, and <math aria-label="\gamma" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B3;</mi></mrow></math> the change in that slope. The post-cutoff slope is <math aria-label="\beta+\gamma" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B2;</mi><mo>&#x0002B;</mo><mi>&#x003B3;</mi></mrow></math>, not <math aria-label="\gamma" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003B3;</mi></mrow></math> alone. Basic has no fixed effects, weather, price-spread control or synthetic benchmark.</p>
+<h3 id="add-calendar-composition">
+Add calendar composition</h3>
+<p>
+The calendar-FE extension preserves those trends and adds hour-of-day and weekday effects:</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="Y_t=\alpha+\tau D_t+\beta r_t+\gamma D_t r_t
++\eta_{hour(t)}+\xi_{weekday(t)}+\varepsilon_t," xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>&#x0003D;</mo><mi>&#x003B1;</mi><mo>&#x0002B;</mo><mi>&#x003C4;</mi><msub><mi>D</mi><mi>t</mi></msub><mo>&#x0002B;</mo><mi>&#x003B2;</mi><msub><mi>r</mi><mi>t</mi></msub><mo>&#x0002B;</mo><mi>&#x003B3;</mi><msub><mi>D</mi><mi>t</mi></msub><msub><mi>r</mi><mi>t</mi></msub><mo>&#x0002B;</mo><msub><mi>&#x003B7;</mi><mrow><mi>h</mi><mi>o</mi><mi>u</mi><mi>r</mi><mo stretchy="false">&#x00028;</mo><mi>t</mi><mo stretchy="false">&#x00029;</mo></mrow></msub><mo>&#x0002B;</mo><msub><mi>&#x003BE;</mi><mrow><mi>w</mi><mi>e</mi><mi>e</mi><mi>k</mi><mi>d</mi><mi>a</mi><mi>y</mi><mo stretchy="false">&#x00028;</mo><mi>t</mi><mo stretchy="false">&#x00029;</mo></mrow></msub><mo>&#x0002B;</mo><msub><mi>&#x003B5;</mi><mi>t</mi></msub><mo>&#x0002C;</mo></mrow></math></div>
+<p>
+where <math aria-label="D_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>D</mi><mi>t</mi></msub></mrow></math> changes at the delivery-start cutoff and <math aria-label="r_t" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>r</mi><mi>t</mi></msub></mrow></math> is elapsed midpoint days. The main bandwidth is 90 days on either side, with triangular weights <math aria-label="1-|r_t|/h" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mn>1</mn><mo>&#x02212;</mo><mo stretchy="false">&#x0007C;</mo><msub><mi>r</mi><mi>t</mi></msub><mo stretchy="false">&#x0007C;</mo><mo>&#x0002F;</mo><mi>h</mi></mrow></math>. Basic models omit calendar fixed effects. Frozen sensitivities retain bandwidths 14/30/60/90/180 days, a three-day donut, signed flow, local-spread terms and the 2025 placebo. Fixed-effect references are the lowest observed levels. The 2024 placebo is unestimated because pre-cutoff 2023 observations are unavailable.</p>
+<figure id="figure-4"><img src="figures/rdit_demo.png" alt="Artificial RDiT illustration showing a local discontinuity and fitted trends" loading="lazy" decoding="async" /><figcaption><strong>Figure 4. A local fit and its HAC inference on artificial data.</strong> <strong>Units:</strong> days from an artificial cutoff on the left; outcome, jump and confidence intervals in MW. <strong>Interpretation:</strong> separate fitted lines define the cutoff jump; the right panel keeps the same fitted coefficient while changing the HAC lag used for uncertainty. <strong>Provenance:</strong> deterministic artificial example generated by <a href="../notebooks/02_rdit_and_hac.ipynb">Notebook 02</a> using package estimation functions. <strong>Limits:</strong> the invented jump, sample and intervals provide no evidence about Montenegro or CBAM. <em>Synthetic illustration — Not empirical research results.</em><span class="figure-source">Source: <a href="figures/rdit_demo.png">docs/figures/rdit_demo.png</a> · SHA-256 7417d4046d5968009c4c3516793cc0dbd26861db45c09f1bd69898ed5d28f425</span></figcaption></figure>
+<p>
+RDiT is a time-series design: serial dependence, anticipation, coincident shocks and trend specification matter, and an earlier placebo can reveal discontinuities unrelated to the policy. A 2025 placebo is therefore an identification stress test, not a specification-selection device. <a href="https://www.nber.org/papers/w23602" rel="noreferrer noopener">Hausman and Rapson, <em>Regression Discontinuity in Time</em></a></p>
+<p>
+The private study records a nonzero 2025 placebo discontinuity. That qualitative limitation is retained: a recurring January movement weakens a uniquely CBAM interpretation. The refactor neither removes this check nor selects a specification to make it disappear. Other corridors provide context but are not automatically valid untreated controls.</p>
+<h3 id="add-bilateral-weather-on-a-matched-sample">
+Add bilateral weather on a matched sample</h3>
+<p>
+The weather extension adds <math aria-label="g(W^{origin}_t,W^{destination}_t)" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>g</mi><mo stretchy="false">&#x00028;</mo><msubsup><mi>W</mi><mi>t</mi><mrow><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi></mrow></msubsup><mo>&#x0002C;</mo><msubsup><mi>W</mi><mi>t</mi><mrow><mi>d</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></msubsup><mo stretchy="false">&#x00029;</mo></mrow></math> to the calendar-FE model. The comparison separates changes caused by restricting observations from changes caused by including controls:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Arm</th>
+<th>
+Sample</th>
+<th>
+Weather terms</th>
+<th>
+Comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+A</td>
+<td>
+Original local sample</td>
+<td>
+None</td>
+<td>
+Reference without sample restriction</td>
+</tr>
+<tr>
+<td>
+B</td>
+<td>
+Weather-complete hours</td>
+<td>
+None</td>
+<td>
+B − A isolates the sample change</td>
+</tr>
+<tr>
+<td>
+C</td>
+<td>
+Exactly B's hours</td>
+<td>
+Bilateral controls</td>
+<td>
+C − B isolates weather adjustment on the same sample</td>
+</tr>
+</tbody>
+</table></div>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="\Delta_{sample}=\hat\tau_B-\hat\tau_A,
+\qquad \Delta_{weather}=\hat\tau_C-\hat\tau_B." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>&#x00394;</mi><mrow><mi>s</mi><mi>a</mi><mi>m</mi><mi>p</mi><mi>l</mi><mi>e</mi></mrow></msub><mo>&#x0003D;</mo><msub><mover accent="true"><mi>&#x003C4;</mi><mo>&#x0005E;</mo></mover><mi>B</mi></msub><mo>&#x02212;</mo><msub><mover accent="true"><mi>&#x003C4;</mi><mo>&#x0005E;</mo></mover><mi>A</mi></msub><mo>&#x0002C;</mo><mspace width="2em" /><msub><mi>&#x00394;</mi><mrow><mi>w</mi><mi>e</mi><mi>a</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi></mrow></msub><mo>&#x0003D;</mo><msub><mover accent="true"><mi>&#x003C4;</mi><mo>&#x0005E;</mo></mover><mi>C</mi></msub><mo>&#x02212;</mo><msub><mover accent="true"><mi>&#x003C4;</mi><mo>&#x0005E;</mo></mover><mi>B</mi></msub><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+Both differences require joint covariance; subtracting standard errors is invalid. The continuous weather terms use the centered linear/quadratic definitions in Section 3. Similar estimates across arms do not establish that all omitted shocks have been removed. Local winter coverage does not establish complete annual weather coverage.</p>
+<h3 id="keep-the-longer-window-questions-separate">
+Keep the longer-window questions separate</h3>
+<p>
+Same-season models use Rome-calendar January 1 through September 17 exclusive in 2024–2026. Main samples drop February 29 and use uniform weights with hour, weekday and month fixed effects. Week fixed effects and leap-day inclusion are retained sensitivities. With 2024 as the reference year, F1's main contrast is <math aria-label="\delta_{26}-\delta_{25}" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>&#x003B4;</mi><mrow><mn>26</mn></mrow></msub><mo>&#x02212;</mo><msub><mi>&#x003B4;</mi><mrow><mn>25</mn></mrow></msub></mrow></math>. F2 adds <math aria-label="S_t^c" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msubsup><mi>S</mi><mi>t</mi><mi>c</mi></msubsup></mrow></math>, <math aria-label="D_{25}S_t^c" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>D</mi><mrow><mn>25</mn></mrow></msub><msubsup><mi>S</mi><mi>t</mi><mi>c</mi></msubsup></mrow></math> and <math aria-label="D_{26}S_t^c" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>D</mi><mrow><mn>26</mn></mrow></msub><msubsup><mi>S</mi><mi>t</mi><mi>c</mi></msubsup></mrow></math>, and compares their two interaction coefficients. Support checks intersect per-year spread ranges or quantile intervals. Piecewise models retain zero and pre-2026 quartile/median knots with year interactions; observations are not selected using significance.</p>
+<p>
+The native-donor slope contrast subtracts frozen-weighted GR/AT F2 contrasts from ME's F2 contrast and retains their joint covariance. The direct gap-F2 branch remains <code>NOT_RUN_UNSPECIFIED_GAP_SPREAD</code>: no arbitrary synthetic price index is introduced.</p>
+<h2 id="5-estimation-hac-and-joint-covariance">
+5. Estimation, HAC and joint covariance</h2>
+<p>
+<a href="../src/cbam_power/estimators.py"><code>estimators.py</code></a> preserves the original weighted least-squares solver, QR-based bread and finite-sample correction. For <math aria-label="B=(X&#x27;WX)^{-1}" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>B</mi><mo>&#x0003D;</mo><mo stretchy="false">&#x00028;</mo><msup><mi>X</mi><mi>&#x02032;</mi></msup><mi>W</mi><mi>X</mi><msup><mo stretchy="false">&#x00029;</mo><mrow><mo>&#x02212;</mo><mn>1</mn></mrow></msup></mrow></math>, the corrected influence row is</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="q_t=\sqrt{\frac{n}{n-k}}\,w_t\hat\varepsilon_t x_t&#x27;B,
+\qquad
+\widehat V_L=\sum_{t,s:|t-s|\leq L}
+\left(1-\frac{|t-s|}{L+1}\right)q_t&#x27;q_s." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>q</mi><mi>t</mi></msub><mo>&#x0003D;</mo><msqrt><mrow><mfrac><mrow><mi>n</mi></mrow><mrow><mi>n</mi><mo>&#x02212;</mo><mi>k</mi></mrow></mfrac></mrow></msqrt><mspace width="0.167em" /><msub><mi>w</mi><mi>t</mi></msub><msub><mover accent="true"><mi>&#x003B5;</mi><mo>&#x0005E;</mo></mover><mi>t</mi></msub><msubsup><mi>x</mi><mi>t</mi><mi>&#x02032;</mi></msubsup><mi>B</mi><mo>&#x0002C;</mo><mspace width="2em" /><msub><mover><mi>V</mi><mo>&#x0005E;</mo></mover><mi>L</mi></msub><mo>&#x0003D;</mo><munder><mo>&#x02211;</mo><mrow><mi>t</mi><mo>&#x0002C;</mo><mi>s</mi><mi>:</mi><mo stretchy="false">&#x0007C;</mo><mi>t</mi><mo>&#x02212;</mo><mi>s</mi><mo stretchy="false">&#x0007C;</mo><mo>&#x02264;</mo><mi>L</mi></mrow></munder><mrow><mo stretchy="true" fence="true" form="prefix">&#x00028;</mo><mn>1</mn><mo>&#x02212;</mo><mfrac><mrow><mo stretchy="false">&#x0007C;</mo><mi>t</mi><mo>&#x02212;</mo><mi>s</mi><mo stretchy="false">&#x0007C;</mo></mrow><mrow><mi>L</mi><mo>&#x0002B;</mo><mn>1</mn></mrow></mfrac><mo stretchy="true" fence="true" form="postfix">&#x00029;</mo></mrow><msubsup><mi>q</mi><mi>t</mi><mi>&#x02032;</mi></msubsup><msub><mi>q</mi><mi>s</mi></msub><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+Here <math aria-label="|t-s|" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mo stretchy="false">&#x0007C;</mo><mi>t</mi><mo>&#x02212;</mo><mi>s</mi><mo stretchy="false">&#x0007C;</mo></mrow></math> is <strong>actual elapsed UTC hours</strong>. The primary lag is 168 hours, with 24-hour inference retained. Unobserved hours contribute zero <em>scores</em> on the time grid; neither outcomes nor missing observations are imputed, and time gaps are not compressed. The Bartlett construction follows the HAC principle of <a href="https://www.nber.org/papers/t0055" rel="noreferrer noopener">Newey and West</a>, with the project's explicit calendar handling and correction preserved.</p>
+<p>
+HAC adjusts inference for heteroskedasticity and serial dependence. It does not remove omitted-variable effects from weather, outages or other coincident shocks.</p>
+<p>
+Joint covariance aligns model influence functions on their union of UTC timestamps. Contrasts use <math aria-label="a&#x27;\hat\beta" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mover accent="true"><mi>&#x003B2;</mi><mo>&#x0005E;</mo></mover></mrow></math> and <math aria-label="a&#x27;\widehat V a" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>a</mi><mi>&#x02032;</mi></msup><mover><mi>V</mi><mo>&#x0005E;</mo></mover><mi>a</mi></mrow></math>, including off-diagonal cross-model terms. Reported intervals use 1.96 standard errors and p-values use the two-sided standard normal distribution. Covariance files, block keys and ordered coefficient names are linked explicitly; <code>model_id</code> alone is not a unique covariance-block key.</p>
+<h2 id="6-fixed-weight-montenegro-synthetic-benchmark">
+6. Fixed-weight Montenegro synthetic benchmark</h2>
+<p>
+The target is Montenegro; the donor pool is Greece and Austria. Convex donor combinations offer a comparative benchmark in the synthetic-control tradition, but this project's frozen feature objective and weak support limit causal interpretation. <a href="https://dspace.mit.edu/entities/publication/89e84a6e-7bb5-4327-bfef-53a86a0c8bab" rel="noreferrer noopener">Abadie, Diamond and Hainmueller, author manuscript</a></p>
+<p>
+<code>GY050_train2024</code> uses historically learned 2024 weights and evaluates 2025. That validation year had already been seen during project development; it is not a pristine preregistered holdout. <code>GY050_final</code> uses historically learned 2024–2025 weights for the final comparative path. The reproduction reads all 16 versions from their frozen source and evaluates the objective at those weights; it never reoptimizes them. No empirical weight values are printed here.</p>
+<p>
+Generation predictors use complete-year Eurostat net generation shares in seven retained groups: hydro, nuclear, coal/manufactured gases, gas, wind, solar and residual other generation. Outcome predictors contain monthly means, hour-of-day profiles, moments, quantiles, and zero/top shares. Feature scales are frozen 2024 cross-object population standard deviations; values are divided by those scales without mean subtraction. Shared constants are omitted, whereas donor-constant target mismatches remain in the support audit. Zero training scales follow the frozen deterministic rule.</p>
+<p>
+For scaled target-minus-donor discrepancies <math aria-label="\Delta_k(w)" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>&#x00394;</mi><mi>k</mi></msub><mo stretchy="false">&#x00028;</mo><mi>w</mi><mo stretchy="false">&#x00029;</mo></mrow></math>, the GY objective is</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="L_\lambda(w)=\frac{\lambda}{n_G}\sum_{k\in G}\Delta_k(w)^2
++\frac{1-\lambda}{B}\sum_{b=1}^{B}
+\frac{1}{n_b}\sum_{k\in b}\Delta_k(w)^2,
+\quad w\geq0,\quad \mathbf1&#x27;w=1." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>L</mi><mi>&#x003BB;</mi></msub><mo stretchy="false">&#x00028;</mo><mi>w</mi><mo stretchy="false">&#x00029;</mo><mo>&#x0003D;</mo><mfrac><mrow><mi>&#x003BB;</mi></mrow><mrow><msub><mi>n</mi><mi>G</mi></msub></mrow></mfrac><munder><mo>&#x02211;</mo><mrow><mi>k</mi><mo>&#x02208;</mo><mi>G</mi></mrow></munder><msub><mi>&#x00394;</mi><mi>k</mi></msub><mo stretchy="false">&#x00028;</mo><mi>w</mi><msup><mo stretchy="false">&#x00029;</mo><mn>2</mn></msup><mo>&#x0002B;</mo><mfrac><mrow><mn>1</mn><mo>&#x02212;</mo><mi>&#x003BB;</mi></mrow><mrow><mi>B</mi></mrow></mfrac><munderover><mo>&#x02211;</mo><mrow><mi>b</mi><mo>&#x0003D;</mo><mn>1</mn></mrow><mrow><mi>B</mi></mrow></munderover><mfrac><mrow><mn>1</mn></mrow><mrow><msub><mi>n</mi><mi>b</mi></msub></mrow></mfrac><munder><mo>&#x02211;</mo><mrow><mi>k</mi><mo>&#x02208;</mo><mi>b</mi></mrow></munder><msub><mi>&#x00394;</mi><mi>k</mi></msub><mo stretchy="false">&#x00028;</mo><mi>w</mi><msup><mo stretchy="false">&#x00029;</mo><mn>2</mn></msup><mo>&#x0002C;</mo><mspace width="1em" /><mi>w</mi><mo>&#x02265;</mo><mn>0</mn><mo>&#x0002C;</mo><mspace width="1em" /><msup><mn mathvariant="bold">1</mn><mi>&#x02032;</mi></msup><mi>w</mi><mo>&#x0003D;</mo><mn>1</mn><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+There are five outcome-feature blocks; GY050 sets the <strong>objective balance</strong> <math aria-label="\lambda=0.5" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>&#x003BB;</mi><mo>&#x0003D;</mo><mn>0.5</mn></mrow></math>. This is not a donor weight. G, GY025, GY050 and GY075 retain training, final and both leave-one-donor-out variants. Neither 2026 outcomes nor post-cutoff fit is used to choose among them in reproduction.</p>
+<p>
+The path is <math aria-label="\widehat Y^{syn}_{ME,t}=\sum_d w_d\max(N_{d,t},0)" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msubsup><mover><mi>Y</mi><mo>&#x0005E;</mo></mover><mrow><mi>M</mi><mi>E</mi><mo>&#x0002C;</mo><mi>t</mi></mrow><mrow><mi>s</mi><mi>y</mi><mi>n</mi></mrow></msubsup><mo>&#x0003D;</mo><msub><mo>&#x02211;</mo><mi>d</mi></msub><msub><mi>w</mi><mi>d</mi></msub><mo>max</mo><mo stretchy="false">&#x00028;</mo><msub><mi>N</mi><mrow><mi>d</mi><mo>&#x0002C;</mo><mi>t</mi></mrow></msub><mo>&#x0002C;</mo><mn>0</mn><mo stretchy="false">&#x00029;</mo></mrow></math> and the gap is <math aria-label="G_{ME,t}=Y_{ME,t}-\widehat Y^{syn}_{ME,t}" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msub><mi>G</mi><mrow><mi>M</mi><mi>E</mi><mo>&#x0002C;</mo><mi>t</mi></mrow></msub><mo>&#x0003D;</mo><msub><mi>Y</mi><mrow><mi>M</mi><mi>E</mi><mo>&#x0002C;</mo><mi>t</mi></mrow></msub><mo>&#x02212;</mo><msubsup><mover><mi>Y</mi><mo>&#x0005E;</mo></mover><mrow><mi>M</mi><mi>E</mi><mo>&#x0002C;</mo><mi>t</mi></mrow><mrow><mi>s</mi><mi>y</mi><mi>n</mi></mrow></msubsup></mrow></math>. Positive parts precede weighting. Any missing fixed-pool donor makes that hour missing; there is no hourly weight renormalization or capacity clipping. Some prediction-error diagnostics use the opposite sign, prediction minus actual, and retain that distinction.</p>
+<figure id="figure-5"><img src="figures/synthetic_demo.png" alt="Artificial actual and fixed-weight synthetic paths with their gap" loading="lazy" decoding="async" /><figcaption><strong>Figure 5. A fixed synthetic comparison and its signed gap.</strong> <strong>Units:</strong> days from an artificial cutoff and MW. <strong>Interpretation:</strong> the upper panel compares an invented target with a fixed artificial donor combination; the lower panel subtracts the latter from the former. <strong>Provenance:</strong> deterministic teaching example generated by <a href="../notebooks/03_synthetic_control.ipynb">Notebook 03</a>, with artificial observations and weights. <strong>Limits:</strong> these paths are not fitted to the empirical target and do not validate the real donor pool or its prefit. <em>Synthetic illustration — Not empirical research results.</em><span class="figure-source">Source: <a href="figures/synthetic_demo.png">docs/figures/synthetic_demo.png</a> · SHA-256 6d867621e76cd0e448ed05cb22d6b99d738a03b019739b00582c38a81d2f673e</span></figcaption></figure>
+<p>
+The frozen evidence status remains <code>DESCRIPTIVE_ONLY_WEAK_PREFIT_WEAK_SUPPORT</code>. Donor completeness and convex support are audited rather than repaired. Weather features are centered and formed within each geography before donor aggregation. Gap regressions are fitted directly, without forcing coefficient subtraction identities. Inference is conditional on fixed weights; no weight-uncertainty bootstrap is implemented. Annual synthetic-weather implementation limitations remain explicit.</p>
+<p>
+The report evaluates prediction errors, bias, normalized RMSE and a validation score relative to a naive training-mean forecast. That score is not the training regression's R². An outside-donor-envelope observation cannot be matched by any convex combination of the fixed donor values at that hour. These diagnostics assess credibility separately from the size of a gap discontinuity; a large estimated gap does not establish a valid counterfactual.</p>
+<h2 id="7-polynomial-robustness-and-preserved-model-coverage">
+7. Polynomial robustness and preserved model coverage</h2>
+<p>
+V3.2 uses <math aria-label="z=r/h" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>z</mi><mo>&#x0003D;</mo><mi>r</mi><mo>&#x0002F;</mo><mi>h</mi></mrow></math> and complete post-cutoff interactions:</p>
+<div class="equation" tabindex="0" role="region" aria-label="Mathematical equation; scroll horizontally if needed"><math aria-label="Y_t=\alpha+\tau D_t+
+\sum_{j=1}^{p}(\beta_jz_t^j+\gamma_jD_tz_t^j)
++\mathrm{FE}_t+\varepsilon_t,\qquad p\in\{1,2,3\}." xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>Y</mi><mi>t</mi></msub><mo>&#x0003D;</mo><mi>&#x003B1;</mi><mo>&#x0002B;</mo><mi>&#x003C4;</mi><msub><mi>D</mi><mi>t</mi></msub><mo>&#x0002B;</mo><munderover><mo>&#x02211;</mo><mrow><mi>j</mi><mo>&#x0003D;</mo><mn>1</mn></mrow><mrow><mi>p</mi></mrow></munderover><mo stretchy="false">&#x00028;</mo><msub><mi>&#x003B2;</mi><mi>j</mi></msub><msubsup><mi>z</mi><mi>t</mi><mi>j</mi></msubsup><mo>&#x0002B;</mo><msub><mi>&#x003B3;</mi><mi>j</mi></msub><msub><mi>D</mi><mi>t</mi></msub><msubsup><mi>z</mi><mi>t</mi><mi>j</mi></msubsup><mo stretchy="false">&#x00029;</mo><mo>&#x0002B;</mo><msub><mrow><mi mathvariant="normal">F</mi><mi mathvariant="normal">E</mi></mrow><mi>t</mi></msub><mo>&#x0002B;</mo><msub><mi>&#x003B5;</mi><mi>t</mi></msub><mo>&#x0002C;</mo><mspace width="2em" /><mi>p</mi><mo>&#x02208;</mo><mo stretchy="false">&#x0007B;</mo><mn>1</mn><mo>&#x0002C;</mo><mn>2</mn><mo>&#x0002C;</mo><mn>3</mn><mo stretchy="false">&#x0007D;</mo><mo>&#x0002E;</mo></mrow></math></div>
+<p>
+For each corridor and order, the schedule includes Basic h90 in 2026, FE h30/60/90/180 in 2026, and FE h90 at the 2025 placebo. It retains HAC168 and identical hourly samples across orders, with no weather or synthetic extension in this branch. P1 must pass independent linear-reference checks before P2, and P2 before P3. The 90-model schedule and 15 unavailable 2024 placebo records remain intact.</p>
+<p>
+Coefficients are transformed back to running-day units by dividing order-<math aria-label="j" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><mi>j</mi></mrow></math> terms by <math aria-label="h^j" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mi>h</mi><mi>j</mi></msup></mrow></math>, with covariance transformed by the same diagonal map on both sides. Numerical checks, fitted curves, turning points, local support and endpoint/interval diagnostics are saved during estimation. Unstable or flagged curves remain in the record; they do not replace the V3 linear baseline.</p>
+<p>
+The full V3 schedule also includes weather A/B/C, synthetic and gap models, same-season F1/F2, spread/support/piecewise analyses, placebos, sensitivity versions and joint contrasts. Explicit <code>BLOCKED</code>, <code>NOT_RUN</code> and <code>UNSUPPORTED</code> records are part of the research result, not missing implementation to be silently bypassed.</p>
+<h2 id="8-reproducibility-verification-and-publication-boundaries">
+8. Reproducibility, verification and publication boundaries</h2>
+<p>
+The pipeline separates input validation, processing, estimation, independent verification and reporting. A run receipt binds input/configuration/code/environment identities to saved artifacts. Verification references cannot serve as estimator outcomes or coefficients; reporting cannot invoke fitting or optimization.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Contract</th>
+<th>
+Required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Frozen-file integrity</td>
+<td>
+Exact SHA-256 identity, unchanged expected values</td>
+</tr>
+<tr>
+<td>
+Sample identity</td>
+<td>
+Exact UTC observations, model keys, ordering, missing masks and statuses</td>
+</tr>
+<tr>
+<td>
+Numerical equivalence</td>
+<td>
+Frozen per-component tolerances, full coefficients and covariance rather than rounded headlines</td>
+</tr>
+<tr>
+<td>
+Provenance and release</td>
+<td>
+Exact registered artifact and transitive permissions; no automatic public approval for derivatives</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+Weather values require absolute differences strictly below <math aria-label="10^{-9}" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><mrow><msup><mn>10</mn><mrow><mo>&#x02212;</mo><mn>9</mn></mrow></msup></mrow></math> and identical null sets. Other numeric tolerances remain those frozen in the registry; they are not adjusted to pass validation. Legacy microsecond and canonical nanosecond sample hashes are reconciled only after actual timestamp equality is demonstrated. Different Parquet serialization hashes alone do not establish a scientific difference.</p>
+<p>
+Private PR5/G5 checks passed for the complete V3/V3.2 comparison in the locked <strong>macOS arm64, Python 3.12.14</strong> environment. That historical validation is distinct from a fresh test of any later release or a different platform. Public tests and notebooks exercise artificial examples; they do not independently reproduce the private empirical findings. The authorized panel, weather, models and detailed comparison evidence remain outside this repository.</p>
+<p>
+The final <strong>PR9 release candidate <code>v0.1.0-rc1</code> / Python package <code>0.1.0rc1</code></strong> completed one new authorized run on <strong>17 October 2026</strong> in that reference environment. Input validation, native ERA5 weather, market panel, fixed-weight synthetic construction, full V3 estimation/verification and V3.2 estimation/verification all passed. The complete Python source identity is <code>34ea74ef89c32e8810459760c5415e77228276ddf2498e6974f4d4b2173e0945</code>. The independent comparisons cover every registered model, coefficient, covariance element, sample identity and status; prior-run outputs were inaccessible during computation. The private receipt binds those exact source bytes, scientific contracts, lockfile, environment and comparison results. This is one final-release run, separate from the two historical PR5 runs. It certifies the formal Montenegro workflow, not generic API applications, cross-platform equivalence or empirical publication rights.</p>
+<p>
+The first public surface contains source, tests, scientific/provenance metadata and artificial learning material. Exact data-access instructions and unresolved permissions are in <a href="data_access.md">data access</a>. Neither numerical validation nor provider attribution grants permission to publish restricted raw data, derived panels, model results or graphics. The rights holder has authorized MIT licensing for the original code and teaching materials. Third-party source and data obligations remain separate and unchanged.</p>
+<h2 id="9-where-the-implementation-came-from">
+9. Where the implementation came from</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Research source</th>
+<th>
+Current module</th>
+<th>
+Preserved responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+V3 data processing, native data and official prices</td>
+<td>
+<a href="../src/cbam_power/market.py"><code>market.py</code></a>, <a href="../src/cbam_power/panel.py"><code>panel.py</code></a></td>
+<td>
+Source priority, interval integration, frozen inheritance and panel variables</td>
+</tr>
+<tr>
+<td>
+V23/V3 weather audit</td>
+<td>
+<a href="../src/cbam_power/weather.py"><code>weather.py</code></a></td>
+<td>
+Native decode, frozen geography and time semantics</td>
+</tr>
+<tr>
+<td>
+V2 weight learning and V3/V3.1 synthetic audits</td>
+<td>
+<a href="../src/cbam_power/synthetic.py"><code>synthetic.py</code></a></td>
+<td>
+Fixed-vector objective evaluation, predictors, paths and diagnostics</td>
+</tr>
+<tr>
+<td>
+V3 design, estimators, empirical and weather models</td>
+<td>
+<a href="../src/cbam_power/design.py"><code>design.py</code></a>, <a href="../src/cbam_power/estimators.py"><code>estimators.py</code></a>, <a href="../src/cbam_power/models.py"><code>models.py</code></a></td>
+<td>
+Full schedules, design matrices, HAC and covariance/contrast relationships</td>
+</tr>
+<tr>
+<td>
+V3.2 estimation and common definitions</td>
+<td>
+<a href="../src/cbam_power/polynomial.py"><code>polynomial.py</code></a></td>
+<td>
+Sequential polynomial estimation and numerical/shape checks</td>
+</tr>
+<tr>
+<td>
+V3/V3.2 frozen comparisons and saved-output presentation</td>
+<td>
+<a href="../src/cbam_power/validation.py"><code>validation.py</code></a>, <a href="../src/cbam_power/reporting/reports.py"><code>reporting/reports.py</code></a></td>
+<td>
+Independent comparisons and report-only rendering</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+Function-level source notes and the frozen configuration's evidence paths preserve the more detailed lineage. Historical directories are not runtime imports. Official institutional and dataset documentation linked above was checked on <strong>2026-10-16</strong>; current web terms do not retrospectively resolve frozen-vintage licence uncertainty.</p>
+<h2 id="10-learn-the-methods-and-inspect-the-prototype-api">
+10. Learn the methods and inspect the prototype API</h2>
+<p>
+Four executed notebooks retain reviewed artificial figures, tables and numerical checkpoints. Each starts from a fresh kernel and calls package algorithms rather than maintaining a second implementation:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>
+Notebook</th>
+<th>
+Learning objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="../notebooks/01_data_and_weather.ipynb">01 · Data and weather</a></td>
+<td>
+Trace interval aggregation, flow signs, UTC/Rome timing and weighted weather construction</td>
+</tr>
+<tr>
+<td>
+<a href="../notebooks/02_rdit_and_hac.ipynb">02 · RDiT and HAC</a></td>
+<td>
+Read local design matrices, kernel weights and elapsed-hour covariance</td>
+</tr>
+<tr>
+<td>
+<a href="../notebooks/03_synthetic_control.ipynb">03 · Synthetic control</a></td>
+<td>
+Evaluate fixed weights, donor completeness, support and actual-minus-synthetic signs</td>
+</tr>
+<tr>
+<td>
+<a href="../notebooks/04_robustness_and_validation.ipynb">04 · Robustness and validation</a></td>
+<td>
+Inspect polynomial order, shape diagnostics and preserved failure statuses</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+The separate <a href="../src/cbam_power/methods.py">reusable methods prototype</a> exposes explicit corridor, timezone, cutoff, bandwidth and inference inputs. It supports local linear triangular RDiT, observed-level hour/weekday fixed effects and the existing elapsed-hour HAC definition. It does not implement a generic version of the complete V3, F1/F2 or polynomial scheduler, and it does not replace the frozen replication engine.</p>
+<blockquote>
+<p>
+<strong>EXPERIMENTAL REUSABLE API — ARTIFICIAL TESTS ONLY; OUTSIDE FORMAL V3/V3.2 SCIENTIFIC CERTIFICATION.</strong> Applying the prototype to a different study requires its own measurement choices, identification assessment, input rights and validation.</p>
+</blockquote>
+<p>
+The prototype accepts in-memory caller data rather than resolving private inputs. <code>aggregate_flows</code> returns signed hourly power, energy and positive export; <code>fit_rdit</code> returns a fitted object, and <code>infer_hac</code> returns its covariance, coefficient order and explicit contrasts. <code>aggregate_era5</code> expects already selected cells and supplied weights: it does not decode NetCDF or construct polygons, and its declared hourly accumulated shift must remain −1. <code>predict_synthetic</code> returns actual, synthetic and gap paths. <code>evaluate_fixed_objective</code> evaluates already scaled features at supplied weights; it does not learn scales, choose a training window or optimize weights.</p>
+<h3 id="try-an-artificial-corridor-and-calendar">
+Try an artificial corridor and calendar</h3>
+<p>
+This tested example changes the declared corridor, time zone, cutoff, bandwidth, HAC lag and donor pool. Its observations and donor values are invented; it is <strong>not a validated Canada–US electricity-market study</strong>. Inputs are supplied in memory, without data acquisition or empirical frozen weights. The assertions check the artificial sample and fixed-weight arithmetic; they do not establish external validity.</p>
+<pre><code class="language-python"># SYNTHETIC DATA — NOT EMPIRICAL RESEARCH RESULTS.
+# Illustrates a different declared corridor/calendar; no real Canadian/US data.
+import numpy as np
+import pandas as pd
+from cbam_power.methods import (
+    Corridor, RDiTSpec, aggregate_flows, validate_inputs,
+    construct_rdit, fit_rdit, infer_hac, predict_synthetic,
+)
+
+corridor = Corridor(id=&quot;ARTIFICIAL_CA_US&quot;, origin=&quot;CA&quot;, destination=&quot;US&quot;)
+zone = &quot;America/Toronto&quot;
+cutoff = pd.Timestamp(&quot;2030-04-01T00:00:00-04:00&quot;)
+t = pd.date_range(cutoff - pd.Timedelta(days=12), periods=24*24*4, freq=&quot;15min&quot;)
+hour = t.floor(&quot;h&quot;)
+r = (hour + pd.Timedelta(minutes=30) - cutoff).total_seconds() / 86400
+local = hour.tz_convert(zone)
+# Every number below is an artificial teaching choice, unrelated to frozen data.
+power = (50 + 3*(hour &gt;= cutoff) + .1*r + .07*local.hour
+         + .2*local.weekday + .15*np.sin(np.arange(len(t))//4))
+power += np.tile([2., -2., 1., -1.], len(t)//4)
+hourly = aggregate_flows(
+    t, power/1000, corridor=corridor, input_unit=&quot;GW&quot;,
+    positive_direction=&quot;origin_to_destination&quot;, duration_minutes=15,
+)
+input_check = validate_inputs(
+    hourly, timestamp=&quot;timestamp_utc&quot;,
+    numeric_columns=(&quot;signed_net_MW&quot;, &quot;positive_export_MW&quot;), nullable_columns=(),
+    frequency_minutes=60, entity_column=&quot;corridor_id&quot;, entity_id=corridor.id,
+)
+spec = RDiTSpec(
+    model_id=&quot;ARTIFICIAL_EXTERNAL_LOCAL&quot;, corridor=corridor,
+    outcome=&quot;positive_export_MW&quot;, calendar_timezone=zone, cutoff=cutoff.isoformat(),
+    bandwidth_days=8, kernel=&quot;triangular&quot;, fixed_effects=(&quot;hour&quot;, &quot;weekday&quot;),
+    hac_hours=12, midpoint_minutes=30, donut_days=0, minimum_side=24,
+)
+design = construct_rdit(hourly, timestamp=&quot;timestamp_utc&quot;, spec=spec)
+fitted = fit_rdit(hourly, timestamp=&quot;timestamp_utc&quot;, spec=spec)
+inference = infer_hac(fitted, lag_hours=12, contrasts={&quot;jump&quot;: {&quot;post&quot;: 1.0}})
+
+# Arbitrary toy donor labels and fixed weights, not proposed empirical donors.
+wide = pd.DataFrame({&quot;t&quot;: hourly.timestamp_utc, &quot;TARGET&quot;: hourly.positive_export_MW,
+                     &quot;TOY_A&quot;: 40., &quot;TOY_B&quot;: 60., &quot;TOY_C&quot;: 50.})
+synthetic = predict_synthetic(
+    wide, timestamp=&quot;t&quot;, target_id=&quot;TARGET&quot;, donor_ids=(&quot;TOY_A&quot;, &quot;TOY_B&quot;, &quot;TOY_C&quot;),
+    weights={&quot;TOY_A&quot;: .2, &quot;TOY_B&quot;: .3, &quot;TOY_C&quot;: .5}, input_kind=&quot;positive_export_MW&quot;,
+)
+assert input_check[&quot;missing_intervals&quot;] == 0
+assert len(design) == len(fitted.sample) == 384
+assert np.isfinite(inference[&quot;covariance&quot;]).all()
+np.testing.assert_allclose(synthetic.synthetic_MW, 51.)
+print(&quot;SYNTHETIC DATA — NOT EMPIRICAL RESEARCH RESULTS&quot;)
+print({&quot;sample_hours&quot;: len(fitted.sample), &quot;jump&quot;: inference[&quot;contrasts&quot;][&quot;jump&quot;],
+       &quot;certification&quot;: inference[&quot;certification&quot;]})
+</code></pre>
+<p>
+The website generates the following reference directly from the public definitions in <code>methods.py</code>, without importing or executing them. In Markdown, this block identifies the source for that generated signature table:</p>
+<div class="table-wrap"><table class="api-table"><thead><tr><th>Source signature</th><th>Contract</th></tr></thead><tbody><tr><td><code>Corridor(*, id: str, origin: str, destination: str)</code></td><td>Caller-defined directed corridor; positive means origin to destination.</td></tr><tr><td><code>RDiTSpec(*, model_id: str, corridor: Corridor, outcome: str, calendar_timezone: str, cutoff: str, bandwidth_days: float, kernel: str, fixed_effects: tuple[str, ...], hac_hours: int, midpoint_minutes: float, donut_days: float, minimum_side: int)</code></td><td>Explicit local-linear settings, independent of the frozen V3 model grid.</td></tr><tr><td><code>validate_inputs(frame, *, timestamp, numeric_columns, nullable_columns, frequency_minutes, entity_column, entity_id)</code></td><td>Validate an in-memory table without filling, sorting or dropping rows.</td></tr><tr><td><code>aggregate_flows(timestamps, values, *, corridor, input_unit, positive_direction, duration_minutes)</code></td><td>Duration-integrate signed MW/GW; take positive part AFTER hourly netting.</td></tr><tr><td><code>construct_rdit(frame, *, timestamp, spec)</code></td><td>Explicit local-design adapter; no historical calendar helper is invoked.</td></tr><tr><td><code>fit_rdit(frame, *, timestamp, spec)</code></td><td>Delegate WLS, FE, rank and sample rules to the unchanged estimator.</td></tr><tr><td><code>infer_hac(fitted, *, lag_hours, contrasts)</code></td><td>Elapsed-hour Bartlett HAC with inherited n/(n-k) correction and contrasts.</td></tr><tr><td><code>aggregate_era5(timestamps, grids, *, region_id, cell_ids, area_weights, raw_units, accumulated_shift_hours)</code></td><td>Apply frozen ERA5 transformations to caller-selected cells and weights.</td></tr><tr><td><code>predict_synthetic(frame, *, timestamp, target_id, donor_ids, weights, input_kind)</code></td><td>Fixed-weight positive-export prediction; gap = actual minus synthetic.</td></tr><tr><td><code>evaluate_fixed_objective(features, *, target_id, donor_ids, weights, balance)</code></td><td>Evaluate supplied, ALREADY SCALED features; never fit or choose weights.</td></tr></tbody></table></div>
+<h2 id="11-authorship-reproducible-reading-and-reuse">
+11. Authorship, reproducible reading and reuse</h2>
+<p>
+<strong>Author:</strong> Hona Zhu. <strong>Contributors, in contribution order:</strong> Mohammad Amir, Jasper Wu and John Sirin. This project is a <strong>Natural Resource and Energy Economics coursework demonstration at Stockholm School of Economics</strong>. AI tools assisted code development and documentation; source and numerical checks remain explicit.</p>
+<p>
+Original code and teaching material are released under the <a href="../LICENSE">MIT licence</a>, with <a href="../CITATION.cff">citation metadata</a>. Third-party inputs and derived empirical artifacts retain their separate restrictions. No original research PDF, restricted observation, empirical coefficient or real-data figure is included in this website.</p>
+<p>
+The page is generated deterministically from this file, its five existing figures and the API source. Equations are converted to native MathML locally. No CDN, external font, analytics, browser script or automatic data request is required. Follow external source links only when you choose to open them. The source itself remains available as ordinary Markdown.</p>
+<p>
+Use <code>make site</code> to rebuild the local HTML page and <code>make site-check</code> to check source identity. Open <code>docs/index.html</code> directly; no server is required. The CI preparation step uses the exact approved source and artificial-material allowlist to create a separate static directory, retaining repository-relative notebooks and source links. Its entry is <code>docs/index.html</code> (<code>/docs/</code> when hosted); publishing only the <code>docs/</code> directory would break parent-relative references. The preparation checks copied identities and the generated page, saves its receipt outside the static directory, and performs no upload or GitHub Pages deployment.</p>
+<details class="build-record"><summary>Build provenance · generated from one Markdown source</summary><p>Offline conversion; no estimation, external fonts, scripts or data requests. Source binding: <code>29463afad39f01bd493000fe3c80ca7469d781590c657c42ddd4191f502da0b0</code>.</p><dl><dt>CITATION.cff</dt><dd><code>44db7838f3c07924276c347e4d5363a714820caa656e1027e992d11bc8fdd26b</code></dd><dt>LICENSE</dt><dd><code>da16f360e0e718d403a9fe60e50cd8b6775f4275fc77e3baf540513b144e737c</code></dd><dt>README.md</dt><dd><code>c5fa2836a3c0ad689de53c945f3bf9a54da9ca66dd46047aa9e7d789e877be72</code></dd><dt>config/main.toml</dt><dd><code>9dae2a98f7b28d713fd5782c25fc51b3c8f9711dfd125bb6e62d374a2eebf267</code></dd><dt>config/polynomial.toml</dt><dd><code>f781899685b3666269ae674b72357d2e98d55708b1a2aa59cdffa86b605ce379</code></dd><dt>docs/data_access.md</dt><dd><code>363f3d3bf51a6b8a7b2d4785f09d51762f1f36a2bc45b38988753e08ca0d72ef</code></dd><dt>docs/figures/corridors.svg</dt><dd><code>607fa9970da3c11285f54270bae3c0a4791b98c0fde267fcc5674d73ee3e4e8b</code></dd><dt>docs/figures/era5_aggregation.svg</dt><dd><code>6bab455dc450a55d5f738ef7d43e5e32f1905a05aeca728bfbe5a8a7bfbced14</code></dd><dt>docs/figures/rdit_demo.png</dt><dd><code>7417d4046d5968009c4c3516793cc0dbd26861db45c09f1bd69898ed5d28f425</code></dd><dt>docs/figures/synthetic_demo.png</dt><dd><code>6d867621e76cd0e448ed05cb22d6b99d738a03b019739b00582c38a81d2f673e</code></dd><dt>docs/figures/workflow.svg</dt><dd><code>33728a990fdef5a1c8d8aab70e78be16ad89a6d841acb2c44a1875632bf4107d</code></dd><dt>docs/methodology.md</dt><dd><code>5bd7f8e5fbf07393303b15fea909ca7356dd55a5e8e0eb779708bd40a618fb27</code></dd><dt>manifests/baselines.toml</dt><dd><code>abab449441409bcfee729a30fd0eb65f9e90239099e917b47828a104e0f56a32</code></dd><dt>manifests/inputs.toml</dt><dd><code>d6fa98e13f9a565051d14fcb086d8f280c066d3551b66ccea382a83ea7722310</code></dd><dt>notebooks/01_data_and_weather.ipynb</dt><dd><code>927d0c6629896d45a59215d711fd69f70edd092da9eebc2986e2a2d8459bfa6d</code></dd><dt>notebooks/02_rdit_and_hac.ipynb</dt><dd><code>85f13372aec534ff6338dd5ffab9f8a7775d22f48c773024c324d2cd690cbc79</code></dd><dt>notebooks/03_synthetic_control.ipynb</dt><dd><code>f45d389a2c05bf6ef9eaa26a6f85fb043081418b95271226c539d3e66f8d7959</code></dd><dt>notebooks/04_robustness_and_validation.ipynb</dt><dd><code>4e7ad308eee9e951365847e4d2a9f1fc25e8e182d823864a0f9e4de4770255bd</code></dd><dt>src/cbam_power/design.py</dt><dd><code>0a6caf43990fd8ab69591dd12d9616b17218ab3385f0a347bebcacd74d258a73</code></dd><dt>src/cbam_power/estimators.py</dt><dd><code>c83c99b2a2dc3b139e75c0161765dbab0032c0ed3c3292fb1a69848f0520e98f</code></dd><dt>src/cbam_power/market.py</dt><dd><code>4cf8df32562af65526e5b3d352c97d92822bed0ea8af7733dcfc3a9eb290f962</code></dd><dt>src/cbam_power/methods.py</dt><dd><code>584ca831b773ee23d05857764ce074c25fc784be032cd9736d4ecef44e1d3c12</code></dd><dt>src/cbam_power/models.py</dt><dd><code>aacf47507e287c2c60b5419412b68d68be0cb0a53dcb9cf16a1790d8e9ab53c0</code></dd><dt>src/cbam_power/panel.py</dt><dd><code>fe962475f21132b9325dc6727cebbf80057f73e2327e61c3543ad803011992d4</code></dd><dt>src/cbam_power/polynomial.py</dt><dd><code>46f4c57bcd78993bcaabf5d1ac2f29dbf6b894fa502f4604f5341dbf7786b00e</code></dd><dt>src/cbam_power/reporting/reports.py</dt><dd><code>3e8dc66815729d05f6d6dd3073caa1600dbe8ecf0796f5df6f439793c946b12c</code></dd><dt>src/cbam_power/site.py</dt><dd><code>d3e9a9b705d9f31e148938d805dca9905e0fb36274474922300888f9aa09d8e2</code></dd><dt>src/cbam_power/synthetic.py</dt><dd><code>4001bd83261ddce0fdf16574629c974a3ee6f5838faf703804e015dc7be8cc04</code></dd><dt>src/cbam_power/validation.py</dt><dd><code>5735beb172df349dc4fd1415f6815bae9f3a384ef6fe2e036bbb7854fc43d336</code></dd><dt>src/cbam_power/weather.py</dt><dd><code>a6bc1d71095f5bfd4927025d559cac417fc5c1affd898f64e3a52d7d94a45502</code></dd></dl></details></main></div><footer class="footer">Original teaching material · artificial illustrations · empirical outputs remain private.</footer></body></html>

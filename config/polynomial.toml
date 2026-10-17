@@ -1,0 +1,231 @@
+# PR1 frozen contract. No private data or personal absolute paths.
+"contract_version" = "PR1_V3_2_FROZEN_1"
+"scientific_role" = "robustness_extension_not_replacement_of_V3"
+
+[evidence]
+"configuration" = "v3_formal_cbam/v3_2_polynomial_rdit/src/common.py"
+"estimator" = "v3_formal_cbam/v3_2_polynomial_rdit/src/estimate.py"
+"engine" = "v3_formal_cbam/src/reused/estimators.py"
+
+
+[design]
+"orders" = [1, 2, 3]
+"bandwidth_grid" = [30, 60, 90, 180]
+"main_bandwidth" = 90
+"kernel" = "triangular"
+"HAC" = 168
+"outcome" = "scheduled_export_proxy"
+"timezone" = "Europe/Rome"
+"delivery_timezone" = "UTC"
+"policy_cutoff_local" = "2026-01-01T00:00:00+01:00"
+"policy_cutoff_utc" = "2025-12-31T23:00:00Z"
+"midpoint" = "delivery start UTC + delivery_interval_minutes / 2"
+"running_variable" = "z = elapsed midpoint days / bandwidth"
+"window_predicate" = "abs(r) <= bandwidth"
+"zero_weight_endpoint" = "assert absent on the frozen midpoint grid"
+"complete_post_interactions" = true
+"term_order" = "const, post, z1, post_z1, ..., zp, post_zp, then fixed effects"
+"BASIC_fixed_effects" = []
+"FE_fixed_effects" = ["hour", "weekday"]
+"weather" = false
+"synthetic" = false
+"codes" = ["AT", "CH", "SI", "GR", "ME"]
+"formal_cutoff_year" = 2026
+"placebo_estimated_year" = 2025
+"placebo_not_estimated_year" = 2024
+"configuration_rule" = "per order/corridor: BASIC h90 2026; FE h30/60/90/180 2026; FE h90 2025"
+"sample_rule" = "sorted unique UTC; hourly continuous; nonmissing frozen Y; same sample_hash and weight_hash across orders"
+"main_N" = 4320
+"main_pre_N" = 2160
+"main_post_N" = 2160
+"sample_N_formula" = "48 * bandwidth_days"
+"rank_formula" = "2 + 2*p + (29 if FE else 0)"
+"reference_categories" = "sorted lowest observed FE category"
+
+[design.zones]
+"AT" = "IT-NORD"
+"CH" = "IT-NORD"
+"SI" = "IT-NORD"
+"GR" = "IT-SUD"
+"ME" = "IT-CSUD"
+
+
+
+[thresholds]
+"condition_number" = 100000000.0
+"negative_prediction_MW" = -1.0
+"endpoint_range_padding_scales" = 1.0
+"turning_neighborhood_days" = 3
+"turning_min_effective_hours" = 24
+"ci_width_ratio_to_p1" = 3.0
+"numerical_atol" = 1e-06
+"numerical_rtol" = 1e-09
+"magnitude_relative_range" = 0.5
+"magnitude_floor_MW" = 25.0
+
+
+[diagnostics]
+"raw_scaled_tau_atol" = 1e-06
+"raw_scaled_tau_rtol" = 1e-09
+"raw_scaled_prediction_atol" = 1e-05
+"raw_scaled_prediction_rtol" = 1e-08
+"qr_coefficient_atol" = 1e-06
+"qr_coefficient_rtol" = 1e-09
+"covariance_eigenvalue_floor_relative" = -1e-08
+"covariance_eigenvalue_scale" = "max(1, max eigenvalue)"
+"curve_variance_floor" = -1e-06
+"cutoff_prediction_atol" = 1e-10
+"cutoff_prediction_rtol" = 1e-12
+"independent_hac_variance_atol" = 1e-08
+"independent_hac_variance_rtol" = 1e-10
+"root_imaginary_max_abs" = 1e-09
+"endpoint_region_abs_z_gt" = 0.9
+"curve_points_per_side" = 241
+"daily_bin" = "floor(r_days), not local calendar day"
+"shape_flags" = ["NEGATIVE_FITTED_HOURLY_OUTCOME", "EXTREME_ENDPOINT_FITTED_VALUE", "CUBIC_TWO_TURNING_POINTS_ON_ONE_SIDE", "TURNING_POINT_LOW_LOCAL_SUPPORT", "TURNING_POINT_IN_LOW_WEIGHT_ENDPOINT_REGION", "CI_EXPANSION_VS_LINEAR", "CONDITION_NUMBER_EXPLOSION"]
+"preserve_flagged_estimates" = true
+"p1_before_p2_before_p3" = true
+"parent_linear_checks" = 15
+
+
+[inventory]
+"results_id" = "polynomial_results"
+"catalog_id" = "polynomial_catalog"
+"not_estimated_id" = "polynomial_not_estimated"
+"estimated_models" = 90
+"per_order" = 30
+"not_estimated_models" = 15
+"expected_model_ids_sha256" = "6cd328da8fb1ea050cf32986566eeee79a80237af511ee9aee4c099df7be5225"
+"statuses_and_flags" = "Exact per-model status, functional_form_status and all shape flags are pinned by immutable JSON; historical PASS is not a new run."
+
+[inventory.estimated_status_counts]
+"ESTIMATED" = 25
+"ESTIMATED_FUNCTIONALLY_UNSTABLE" = 65
+
+
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P1_AT"
+"corridor" = "AT"
+"polynomial_order" = 1
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P2_AT"
+"corridor" = "AT"
+"polynomial_order" = 2
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P3_AT"
+"corridor" = "AT"
+"polynomial_order" = 3
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P1_CH"
+"corridor" = "CH"
+"polynomial_order" = 1
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P2_CH"
+"corridor" = "CH"
+"polynomial_order" = 2
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P3_CH"
+"corridor" = "CH"
+"polynomial_order" = 3
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P1_SI"
+"corridor" = "SI"
+"polynomial_order" = 1
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P2_SI"
+"corridor" = "SI"
+"polynomial_order" = 2
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P3_SI"
+"corridor" = "SI"
+"polynomial_order" = 3
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P1_GR"
+"corridor" = "GR"
+"polynomial_order" = 1
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P2_GR"
+"corridor" = "GR"
+"polynomial_order" = 2
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P3_GR"
+"corridor" = "GR"
+"polynomial_order" = 3
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P1_ME"
+"corridor" = "ME"
+"polynomial_order" = 1
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P2_ME"
+"corridor" = "ME"
+"polynomial_order" = 2
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[[not_estimated]]
+"model_id" = "V3_2_PLACEBO2024_FE_P3_ME"
+"corridor" = "ME"
+"polynomial_order" = 3
+"cutoff" = "2024-01-01"
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"detail" = "No 2023 pre-cutoff observations; not estimated"
+
+[additional_not_run]
+"HAC24" = "NOT_RUN_IN_FROZEN_POLYNOMIAL_GRID"
+"weather" = "NOT_IN_EXTENSION_SCOPE"
+"synthetic" = "NOT_IN_EXTENSION_SCOPE"
+

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+  <title id="title">Research design: actual flows, a synthetic benchmark and bilateral weather</title>
+  <desc id="desc">Original redraw of the existing project presentation's three research branches. Left: Energy-Charts commercial net-flow mirrors with ENTSO-E provenance are harmonized into positive hourly net exports, then analyzed using Basic and calendar-fixed-effect local RDiT. Centre: Montenegro is matched to Greece and Austria, historical 2024 weights are evaluated in 2025, and a separately frozen final benchmark defines an actual-minus-synthetic gap in MW. Right: ERA5 grid variables are area weighted using frozen geographic intersections, aligned to hourly delivery times, and used as bilateral weather controls in RDiT. No empirical result or donor weight is shown.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#587b96"/></marker>
+    <marker id="arrowTeal" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#167d8d"/></marker>
+    <marker id="arrowGold" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#9b752c"/></marker>
+  </defs>
+  <rect width="1200" height="740" rx="14" fill="#f7f9fb"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="30" y="39" fill="#18354a" font-size="28" font-weight="700">Research design</text>
+    <text x="30" y="70" fill="#607583" font-size="18">Electricity imports and price-spread responsiveness around the 1 January 2026 cutoff</text>
+    <rect x="30" y="91" width="360" height="531" rx="12" fill="#edf3f8" stroke="#cedbe5"/>
+    <rect x="420" y="91" width="360" height="531" rx="12" fill="#eaf5f4" stroke="#b9d9d7"/>
+    <rect x="810" y="91" width="360" height="531" rx="12" fill="#f8f4e9" stroke="#dfd2af"/>
+    <g text-anchor="middle" font-size="21" font-weight="700">
+      <text x="210" y="123" fill="#375e7b">Actual-corridor RDiT</text>
+      <text x="600" y="123" fill="#116a78">Synthetic comparison</text>
+      <text x="990" y="123" fill="#886622">Bilateral weather</text>
+    </g>
+    <g fill="#fff" stroke="#b9cbd9" stroke-width="1.2">
+      <rect x="46" y="144" width="328" height="68" rx="8"/>
+      <rect x="46" y="241" width="328" height="68" rx="8"/>
+      <rect x="46" y="338" width="328" height="68" rx="8"/>
+      <rect x="46" y="435" width="328" height="68" rx="8"/>
+      <rect x="46" y="532" width="156" height="68" rx="8"/>
+      <rect x="218" y="532" width="156" height="68" rx="8"/>
+    </g>
+    <g fill="#fff" stroke="#a9cfca" stroke-width="1.2">
+      <rect x="436" y="144" width="328" height="68" rx="8"/>
+      <rect x="436" y="241" width="328" height="68" rx="8"/>
+      <rect x="436" y="338" width="328" height="68" rx="8"/>
+      <rect x="436" y="435" width="328" height="68" rx="8"/>
+      <rect x="436" y="532" width="328" height="68" rx="8"/>
+    </g>
+    <g fill="#fff" stroke="#d4c49c" stroke-width="1.2">
+      <rect x="826" y="144" width="328" height="68" rx="8"/>
+      <rect x="826" y="241" width="328" height="68" rx="8"/>
+      <rect x="826" y="338" width="328" height="68" rx="8"/>
+      <rect x="826" y="435" width="328" height="68" rx="8"/>
+      <rect x="826" y="532" width="328" height="68" rx="8"/>
+    </g>
+    <g fill="none" stroke="#587b96" stroke-width="1.8" marker-end="url(#arrowBlue)">
+      <path d="M210 212V235"/><path d="M210 309V332"/><path d="M210 406V429"/>
+      <path d="M210 503V516H124V526"/><path d="M210 516H296V526"/>
+    </g>
+    <g fill="none" stroke="#167d8d" stroke-width="1.8" marker-end="url(#arrowTeal)">
+      <path d="M600 212V235"/><path d="M600 309V332"/><path d="M600 406V429"/><path d="M600 503V526"/>
+    </g>
+    <g fill="none" stroke="#9b752c" stroke-width="1.8" marker-end="url(#arrowGold)">
+      <path d="M990 212V235"/><path d="M990 309V332"/><path d="M990 406V429"/><path d="M990 503V526"/>
+    </g>
+    <g text-anchor="middle" fill="#18354a" font-size="18" font-weight="700">
+      <text x="210" y="172">Commercial net flow</text>
+      <text x="210" y="269">Harmonize native observations</text>
+      <text x="210" y="366">Positive hourly net exports</text>
+      <text x="210" y="463">Local RDiT</text>
+      <text x="124" y="560">Basic</text><text x="296" y="560">Calendar FE</text>
+      <text x="600" y="172">Corridor matching</text>
+      <text x="600" y="269">Learn on 2024</text>
+      <text x="600" y="366">Validate in 2025</text>
+      <text x="600" y="463">Final fixed benchmark</text>
+      <text x="600" y="560">Relative-gap RDiT</text>
+      <text x="990" y="172">Copernicus / ECMWF ERA5</text>
+      <text x="990" y="269">Frozen area weights</text>
+      <text x="990" y="366">Regional hourly variables</text>
+      <text x="990" y="463">Bilateral weather controls</text>
+      <text x="990" y="560">Weather-adjusted RDiT</text>
+    </g>
+    <g text-anchor="middle" fill="#506879" font-size="15">
+      <text x="210" y="196">Energy-Charts · ENTSO-E provenance</text>
+      <text x="210" y="293">UTC · MW · hourly · origin → Italy</text>
+      <text x="210" y="390">Y = max(hourly commercial net MW, 0)</text>
+      <text x="210" y="487">±90 days · cutoff 1 Jan 2026</text>
+      <text x="124" y="584">Separate trends</text><text x="296" y="584">Hour + weekday</text>
+      <text x="600" y="196">ME target · GR / AT donor pool</text>
+      <text x="600" y="293">Generation mix + flow features</text>
+      <text x="600" y="390">Apply frozen 2024 weights</text>
+      <text x="600" y="487">Separate 2024–2025 weight version</text>
+      <text x="600" y="584">G = Actual ME − Synthetic ME (MW)</text>
+      <text x="990" y="196">Temperature · wind · SSRD · TP</text>
+      <text x="990" y="293">Frozen WGS84 mask intersections</text>
+      <text x="990" y="390">Cell conversion → spatial mean · UTC</text>
+      <text x="990" y="487">Origin + Italian destination zone</text>
+      <text x="990" y="584">Calendar FE + paired A/B/C checks</text>
+    </g>
+    <text x="30" y="654" fill="#37576f" font-size="16">Shared local design: triangular kernel · specified calendar effects · elapsed-hour HAC168 and HAC24</text>
+    <text x="30" y="682" fill="#607583" font-size="16">Reproduction reads frozen weights; it does not relearn them. Existing scientific definitions and statuses are preserved.</text>
+    <text x="1170" y="719" text-anchor="end" fill="#7a8b96" font-size="14">Original redraw of the presentation's research logic · no empirical results shown</text>
+  </g>
+</svg>

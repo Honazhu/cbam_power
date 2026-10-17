@@ -1,0 +1,91 @@
+name: Public software and artificial examples
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public:
+    name: Public tests and teaching notebooks (not empirical replication)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      UV_LINK_MODE: copy
+      UV_PROJECT_ENVIRONMENT: ${{ runner.temp }}/cbam-environment
+      RUN_ROOT: ${{ runner.temp }}/cbam-artificial-runs
+      MPLCONFIGDIR: ${{ runner.temp }}/matplotlib
+      JUPYTER_RUNTIME_DIR: ${{ runner.temp }}/jupyter
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.23"
+          enable-cache: false
+      - name: Install locked Python and non-editable package
+        run: |
+          uv python install 3.12.14
+          make install
+      - name: Import and doctor outside the repository
+        run: |
+          cd "$RUNNER_TEMP"
+          "$UV_PROJECT_ENVIRONMENT/bin/python" -B -c 'import cbam_power'
+          "$UV_PROJECT_ENVIRONMENT/bin/cbam-power" doctor --mode demo
+      - name: Offline website matches maintained source
+        run: make site-check
+      - name: Public tests only
+        run: make test
+      - name: Artificial pipeline
+        run: make demo RUN_ID=ci_demo
+      - name: Independent fresh-kernel teaching notebooks
+        run: make notebooks RUN_ID=ci_learning
+      - name: Build actual distribution files
+        run: uv build --no-sources --out-dir "$RUNNER_TEMP/cbam-packages" --no-create-gitignore
+      - name: Release safety and wheel/sdist inspection
+        run: make release-check RUN_ID=ci_release_check PACKAGE_ROOT="$RUNNER_TEMP/cbam-packages"
+
+      - name: Prepare allowlisted Pages files (no upload or deployment)
+        run: |
+          "$UV_PROJECT_ENVIRONMENT/bin/python" -B - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          import os
+          from cbam_power import portfolio, release, site
+
+          source, registry, selection, _ = portfolio.inspect_source(Path.cwd())
+          portfolio.inspect_installed_code(source, selection)
+          temporary = Path(os.environ["RUNNER_TEMP"]).resolve()
+          destination = temporary / "cbam-pages-artifact"
+          receipt = release.stage_public(
+              registry, source, destination, whitelist=selection,
+              context="public_repository",
+              satisfied_conditions={"retain_mit_notice": "mit-notice-in-candidate"},
+          )
+          files = set()
+          for path in destination.rglob("*"):
+              if path.is_symlink():
+                  raise RuntimeError("PAGES_ARTIFACT_LINK_REJECTED")
+              if path.is_file():
+                  files.add(path.relative_to(destination).as_posix())
+          if files != set(selection):
+              raise RuntimeError("PAGES_ARTIFACT_CLOSURE_CHANGED")
+          for name in sorted(selection):
+              copied = hashlib.sha256((destination / name).read_bytes()).hexdigest()
+              expected = hashlib.sha256((source / name).read_bytes()).hexdigest()
+              if copied != expected:
+                  raise RuntimeError("PAGES_ARTIFACT_IDENTITY_CHANGED")
+          if site.render_site(destination) != (destination / "docs/index.html").read_text():
+              raise RuntimeError("PAGES_SITE_BUILD_STALE")
+          receipt.update(entry="docs/index.html", uploaded=False, deployed=False)
+          (temporary / "cbam-pages-preparation.json").write_text(
+              json.dumps(receipt, indent=2) + "\n"
+          )
+          print("PAGES ARTIFACT PREPARED: docs/index.html; NOT UPLOADED OR DEPLOYED")
+          PY

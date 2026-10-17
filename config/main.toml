@@ -1,0 +1,684 @@
+# PR1 frozen contract. No private data or personal absolute paths.
+"contract_version" = "PR1_V3_FROZEN_1"
+
+[research_hierarchy]
+"formal_baseline" = "V3_FORMAL_CBAM_1"
+"presentation_only" = "V3.1"
+"robustness_extension" = "V3.2_POLYNOMIAL_RDIT"
+"historical_benchmark" = "V2F"
+"historical_upstream" = ["V0", "V1", "V2", "V21", "V23", "V26"]
+"side_tasks" = "EXCLUDED"
+
+
+[evidence]
+"design" = "v3_formal_cbam/config/design.json"
+"timing" = "v3_formal_cbam/src/reused/design.py"
+"variables" = "v3_formal_cbam/src/variables.py"
+"estimator" = "v3_formal_cbam/src/reused/estimators.py"
+"model_grid" = "v3_formal_cbam/src/reused/empirical.py"
+"assembly" = "v3_formal_cbam/src/compute.py"
+"weather" = "v3_formal_cbam/src/reused/weather_models.py"
+"synthetic_weather" = "v3_formal_cbam/src/reused/weather_synthetic.py"
+"synthetic" = "v3_formal_cbam/src/reused/synthetic_me.py"
+"stale_legacy_fields" = "Do not activate CH targets, physical outcome regressions or obsolete weather_status from inherited V2 config."
+
+
+[time]
+"calendar_timezone" = "Europe/Rome"
+"delivery_timezone" = "UTC"
+"timestamp_role" = "delivery_start"
+"timestamp_storage_unit" = "us"
+"canonical_hash_unit" = "ns"
+"policy_cutoff_local" = "2026-01-01T00:00:00+01:00"
+"policy_cutoff_utc" = "2025-12-31T23:00:00Z"
+"window_start_inclusive" = "2023-12-31T23:00:00Z"
+"window_end_exclusive" = "2026-09-16T22:00:00Z"
+"delivery_minutes" = 60
+"midpoint_offset_minutes" = 30
+"running_time" = "(UTC delivery midpoint - UTC cutoff) / 86400 seconds"
+"post" = "UTC delivery start >= UTC cutoff"
+"weekday_reference" = 0
+"hour_reference" = 0
+"calendar_week" = "ISO week"
+
+
+[panel]
+"baseline_id" = "v3_panel"
+"rows" = 118795
+"hours_per_corridor" = 23759
+"columns" = 40
+"primary_key" = ["corridor_id", "timestamp_utc"]
+"actuals" = ["AT_IT", "CH_IT", "SI_IT", "GR_IT", "ME_IT"]
+"missing_core_allowed" = false
+"missing_weather" = "Retain frozen missing set; never impute to pass a gate."
+
+[panel.zones]
+"AT_IT" = "IT-NORD"
+"CH_IT" = "IT-NORD"
+"SI_IT" = "IT-NORD"
+"GR_IT" = "IT-SUD"
+"ME_IT" = "IT-CSUD"
+
+
+
+[market]
+"signed_flow" = "Italy reporter positive = origin to Italy"
+"raw_flow_unit" = "GW"
+"flow_multiplier_to_MW" = 1000
+"hourly_aggregation" = "duration weighted signed native values, complete 60 observed minutes required"
+"native_interval_minutes" = [15, 30, 60]
+"positive_export_proxy" = "max(hourly commercial_net_MW, 0)"
+"positive_proxy_is_gross_export" = false
+"signed_outcome" = "commercial_net_MW"
+"power_unit" = "MW"
+"energy_unit" = "MWh"
+"energy_rule" = "sum(native_MW * duration_minutes / 60)"
+"physical_flow" = "Separate series; not an alternative formal outcome grid"
+"spread" = "destination_price - origin_price"
+"price_unit" = "EUR/MWh"
+"spread_center" = "Frozen pre-2026 center; spread_c = raw_price_spread - spread_center"
+"preserved_v1_corridors" = ["AT_IT", "CH_IT", "ME_IT"]
+"price_priority_SI" = ["Energy-Charts frozen mirror", "SMARD gap fill"]
+"price_priority_GR" = ["HEnEx official frozen vintage", "Energy-Charts frozen mirror"]
+"destination_price" = "corridor bidding zone, not PUN"
+
+
+[rdit]
+"terms" = ["const", "post", "r", "post_r"]
+"main_bandwidth_days" = 90
+"bandwidth_days" = [14, 30, 60, 90, 180]
+"donut_days" = [0, 3]
+"window_predicate" = "abs(r) < bandwidth and abs(r) >= donut"
+"kernel" = "triangular"
+"kernel_formula" = "1 - abs(r) / bandwidth"
+"fixed_effects" = ["hour", "weekday"]
+"basic_fixed_effects" = []
+"basic_bandwidth_days" = 90
+"basic_hac_hours" = [168, 24]
+"outcomes" = ["scheduled_export_proxy", "commercial_net_MW"]
+"placebo_years" = [2024, 2025]
+"local_spread_terms" = ["post", "r", "post_r", "spread_c", "post_s"]
+
+[rdit.local_spread_contrast]
+"spread_c" = 1
+"post_s" = 1
+
+
+
+[inference]
+"hac_elapsed_hours" = [168, 24]
+"kernel" = "Bartlett"
+"hac_kernel" = "1 - abs(lag) / (L + 1)"
+"covariance_grid" = "real elapsed UTC hours; missing slots contain zero scores, not zero outcomes"
+"influence" = "(X * (w * residual)) @ bread * sqrt(n/(n-k))"
+"bread" = "inverse weighted XTX via inverse QR triangular factor"
+"solver" = "scipy.linalg.lstsq lapack_driver=gelsd"
+"fe_reference" = "sorted lowest observed level, drop first"
+"minimum_sample" = 100
+"minimum_pre_or_post" = 24
+"full_rank_required" = true
+"joint_cross_covariance_required" = true
+"confidence_multiplier" = 1.96
+"p_value" = "two-sided standard normal survival function"
+"negative_contrast_variance_error_below" = -1e-07
+
+
+[same_season]
+"years" = [2024, 2025, 2026]
+"start_local" = "01-01T00:00:00"
+"end_local_exclusive" = "09-17T00:00:00"
+"drop_feb29_main" = true
+"fixed_effects" = ["hour", "weekday", "month"]
+"alternative_fixed_effects" = ["hour", "weekday", "week"]
+"sensitivities" = ["week_FE", "include_leap_day"]
+"uniform_weights" = true
+"reference_year" = 2024
+"full_main_N" = 18645
+"F1_terms" = ["D25", "D26"]
+"F1_primary" = "level_2026_minus_2025"
+"F2_terms" = ["D25", "D26", "spread_c", "D25_s", "D26_s"]
+"F2_primary" = "slope_2026_minus_2025"
+"F2_unit" = "MW/(EUR/MWh)"
+"F2_interpretation" = "conditional association, not causal elasticity"
+"support" = ["full", "minmax", "p5_p95", "p10_p90"]
+"support_rule" = "intersection of per-year raw-spread quantile intervals, inclusive bounds"
+"piecewise_knots" = "sorted unique [0, pre-2026 P25, P50, P75]"
+"piecewise_interactions" = "each hinge interacted with D25 and D26"
+"native_donor_Theta" = "ME F2 slope contrast minus frozen-weighted native donor slope contrasts; retain joint covariance"
+
+[same_season.F1_contrasts]
+
+[same_season.F1_contrasts.level_2026_minus_2025]
+"D26" = 1
+"D25" = -1
+
+
+
+[same_season.F2_contrasts]
+
+[same_season.F2_contrasts.slope_2024]
+"spread_c" = 1
+
+
+[same_season.F2_contrasts.slope_2025]
+"spread_c" = 1
+"D25_s" = 1
+
+
+[same_season.F2_contrasts.slope_2026]
+"spread_c" = 1
+"D26_s" = 1
+
+
+[same_season.F2_contrasts.slope_2025_minus_2024]
+"D25_s" = 1
+
+
+[same_season.F2_contrasts.slope_2026_minus_2024]
+"D26_s" = 1
+
+
+[same_season.F2_contrasts.slope_2026_minus_2025]
+"D26_s" = 1
+"D25_s" = -1
+
+
+[same_season.F2_contrasts.slope_2026_minus_pre_average]
+"D26_s" = 1
+"D25_s" = -0.5
+
+
+
+
+[weather]
+"fields" = ["temp_c", "wind_ms", "ssrd_processed", "tp_processed"]
+"units" = ["degC", "m/s", "W/m2", "mm/hour"]
+"geographies" = ["AT", "CH", "SI", "GR", "ME", "IT-NORD", "IT-SUD", "IT-CSUD"]
+"grid_degrees" = 0.25
+"area_weight" = "WGS84 cell/polygon intersection area normalized within frozen mask"
+"expver_priority" = [1, 5]
+"temperature" = "t2m - 273.15"
+"wind" = "area-weighted gridpoint hypot(u10, v10), not hypot of spatial means"
+"radiation" = "ssrd / 3600"
+"precipitation" = "tp * 1000"
+"accumulated_shift_hours" = -1
+"instantaneous_shift_hours" = 0
+"variants" = ["FULL_WEATHER_QUADRATIC", "WEATHER_LINEAR_ONLY"]
+"quadratic_fields" = ["temp_c", "wind_ms", "ssrd_processed"]
+"center_local" = "model policy-pre complete-case reference"
+"center_annual" = "2024 same-season reference"
+"deduplicate" = "only exact duplicate or constant columns; retain high correlations"
+"pair_identity" = ["timestamps", "N", "year_N", "outcome", "kernel", "FE_reference", "core_design", "pre_post_N", "endpoints"]
+"annual_rule" = "Full frozen annual sample must have complete bilateral weather; no unbalanced fallback"
+"synthetic_feature_order" = "center and form nonlinear features per geography, then frozen-weight donor aggregation"
+"gap_weather" = "direct regression using target bilateral and synthetic features; no forced actual-minus-synthetic coefficient identity"
+"design_registry_ids" = ["engine_weather_model_design", "engine_weather_synthetic_design"]
+"membership_registry_id" = "engine_weather_membership"
+
+[weather.arms]
+"A" = "no weather, original sample"
+"B" = "no weather, C complete-case sample"
+"C" = "bilateral weather, exactly B sample"
+
+
+[weather.contrasts]
+"weather_adjustment" = "C - B"
+"sample_change" = "B - A"
+
+
+
+[synthetic]
+"target" = "ME_IT"
+"donors" = ["GR_IT", "AT_IT"]
+"weights_baseline_id" = "v2_weights"
+"versions" = ["GY025_final", "GY025_final_loo_AT_IT", "GY025_final_loo_GR_IT", "GY025_train2024", "GY050_final", "GY050_final_loo_AT_IT", "GY050_final_loo_GR_IT", "GY050_train2024", "GY075_final", "GY075_final_loo_AT_IT", "GY075_final_loo_GR_IT", "GY075_train2024", "G_final", "G_final_loo_AT_IT", "G_final_loo_GR_IT", "G_train2024"]
+"version_count" = 16
+"main_versions" = ["GY050_train2024", "GY050_final"]
+"training_years" = [2024]
+"validation_years" = [2025]
+"final_training_years" = [2024, 2025]
+"main_lambda" = 0.5
+"objective" = "lambda generation-share discrepancy + (1-lambda) mean of five scaled flow-feature block discrepancies"
+"feature_blocks" = ["monthly_path", "hour_shape", "moments", "quantiles", "zero_top"]
+"feature_scales_reference" = "2024 frozen feature definition"
+"feature_registry_ids" = ["v2_weight_predictors", "v2_weight_feature_freeze"]
+"generation_source" = "Eurostat monthly net GWh, complete 12 months, no Ember gross splice"
+"generation_features" = ["hydro", "nuclear", "coal_lignite_and_manufactured_gases", "gas", "wind", "solar", "other"]
+"generation_hydro" = "includes mixed and pumped"
+"generation_coal" = "includes manufactured gases"
+"prediction" = "sum(w_d * positive_part(hourly signed donor flow_d))"
+"missing_donor" = "whole hour missing; never renormalize hourly weights"
+"gap" = "actual_ME - synthetic_Y"
+"prediction_error" = "synthetic_Y - actual_ME"
+"capacity_clipping" = false
+"nameplate_MW_diagnostic_only" = 600
+"weight_reoptimization_allowed" = false
+"donor_reselection_allowed" = false
+"bootstrap" = "NOT_RUN"
+"inference" = "conditional on frozen weights"
+"evidence_status" = "DESCRIPTIVE_ONLY_WEAK_PREFIT_WEAK_SUPPORT"
+
+
+[inventory]
+"results_id" = "v3_results"
+"catalog_id" = "v3_catalog"
+"coefficients_id" = "v3_coefficients"
+"covariance_index_id" = "v3_covariance_index"
+"estimated_records" = 1892
+"catalog_rows" = 1928
+"coefficient_rows" = 77574
+"validation_rows" = 1
+"not_estimated_rows" = 35
+"expected_model_ids_sha256" = "d3dc890154e4db3b3da44d482894fff41b5fe9cba6d35b33156892661f7648d3"
+"model_id_encoding" = "SHA256 UTF-8 canonical JSON sorted list; full IDs in immutable private results.models and catalog"
+"status_identity" = "exact ID/status/reason/implementation_status; preserve duplicate legacy status records by ordinal, never deduplicate"
+"full_parameters" = "all coefficients and covariance columns, including FE and contrasts"
+"full_samples" = "panel + all-version synthetic panel + source catalogs, membership, support bounds, FE reference and sample hashes; timestamps reconstructed/verified in PR5"
+
+[inventory.estimated_status_counts]
+"ESTIMATED" = 1798
+"NO_WEATHER_BASELINE" = 56
+"WEATHER_ADJUSTED_RUN" = 28
+"ESTIMATED_DESCRIPTIVE" = 10
+
+
+[inventory.families]
+"R1" = 576
+"F1" = 276
+"F2" = 378
+"local_spread_appendix" = 84
+"R1_placebo" = 90
+"F2_piecewise" = 42
+"R2" = 396
+"R2_placebo" = 40
+"BASIC_RDiT" = 10
+
+
+[inventory.not_estimated_status_counts]
+"BLOCKED_WEATHER_PANEL" = 10
+"NOT_RUN" = 3
+"INSUFFICIENT_PRE_SUPPORT" = 21
+"NOT_RUN_UNSPECIFIED_GAP_SPREAD" = 1
+
+
+[inventory.formal_main_ids]
+"basic_me" = "V3_BASIC_ME"
+"fe_me" = "V3_FE_ME"
+"weather_me" = "V3_WEATHER_ME"
+"synthetic_me" = "V3_SYNTHETIC_ME"
+"gap_me" = "V3_GAP_ME"
+"gap_weather" = "V3_GAP_WEATHER_ME"
+"placebo_me" = "V3_PLACEBO2025_ME"
+"f1_me" = "V3_F1_ME"
+"f2_me" = "V3_F2_ME_full"
+"basic_AT" = "V3_BASIC_AT"
+"fe_AT" = "V3_FE_AT"
+"weather_AT" = "V3_WEATHER_AT"
+"f1_AT" = "V3_F1_AT"
+"f2_AT" = "V3_F2_AT_full"
+"basic_CH" = "V3_BASIC_CH"
+"fe_CH" = "V3_FE_CH"
+"weather_CH" = "V3_WEATHER_CH"
+"f1_CH" = "V3_F1_CH"
+"f2_CH" = "V3_F2_CH_full"
+"basic_SI" = "V3_BASIC_SI"
+"fe_SI" = "V3_FE_SI"
+"weather_SI" = "V3_WEATHER_SI"
+"f1_SI" = "V3_F1_SI"
+"f2_SI" = "V3_F2_SI_full"
+"basic_GR" = "V3_BASIC_GR"
+"fe_GR" = "V3_FE_GR"
+"weather_GR" = "V3_WEATHER_GR"
+"f1_GR" = "V3_F1_GR"
+"f2_GR" = "V3_F2_GR_full"
+"basic_ME" = "V3_BASIC_ME"
+"fe_ME" = "V3_FE_ME"
+"weather_ME" = "V3_WEATHER_ME"
+"f1_ME" = "V3_F1_ME"
+"f2_ME" = "V3_F2_ME_full"
+"f2_me_minmax" = "V3_F2_ME_minmax"
+"f2_me_p5_p95" = "V3_F2_ME_p5_p95"
+"f2_me_p10_p90" = "V3_F2_ME_p10_p90"
+
+
+
+[exclusions]
+"CH_synthetic" = "PERMANENTLY_EXCLUDED_FROM_FORMAL_ANALYSIS"
+"G_CH" = "PERMANENTLY_EXCLUDED_FROM_FORMAL_ANALYSIS"
+"D" = "PERMANENTLY_EXCLUDED_FROM_FORMAL_ANALYSIS"
+"FR_formal" = "EXCLUDED"
+"weight_bootstrap" = "NOT_RUN"
+"normalized_outcome_models" = "NOT_RUN_NOT_AUTHORISED_AS_PRIMARY"
+"unsupported_status_rule" = "Preserve any frozen UNSUPPORTED records; none introduced to replace scientific states."
+"forecast_or_causal_claim" = false
+
+
+[[not_estimated]]
+"series" = "AT_actual"
+"model" = "F1"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "AT;IT-NORD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_000"
+"frozen_json_pointer" = "/blocked_models/0"
+
+[[not_estimated]]
+"series" = "AT_actual"
+"model" = "F2"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "AT;IT-NORD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_001"
+"frozen_json_pointer" = "/blocked_models/1"
+
+[[not_estimated]]
+"series" = "CH_actual"
+"model" = "F1"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "CH;IT-NORD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_002"
+"frozen_json_pointer" = "/blocked_models/2"
+
+[[not_estimated]]
+"series" = "CH_actual"
+"model" = "F2"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "CH;IT-NORD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_003"
+"frozen_json_pointer" = "/blocked_models/3"
+
+[[not_estimated]]
+"series" = "SI_actual"
+"model" = "F1"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "SI;IT-NORD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_004"
+"frozen_json_pointer" = "/blocked_models/4"
+
+[[not_estimated]]
+"series" = "SI_actual"
+"model" = "F2"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "SI;IT-NORD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_005"
+"frozen_json_pointer" = "/blocked_models/5"
+
+[[not_estimated]]
+"series" = "GR_actual"
+"model" = "F1"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "GR;IT-SUD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_006"
+"frozen_json_pointer" = "/blocked_models/6"
+
+[[not_estimated]]
+"series" = "GR_actual"
+"model" = "F2"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "GR;IT-SUD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_007"
+"frozen_json_pointer" = "/blocked_models/7"
+
+[[not_estimated]]
+"series" = "ME_actual"
+"model" = "F1"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "ME;IT-CSUD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_008"
+"frozen_json_pointer" = "/blocked_models/8"
+
+[[not_estimated]]
+"series" = "ME_actual"
+"model" = "F2"
+"status" = "BLOCKED_WEATHER_PANEL"
+"reason" = "BLOCKED_ANNUAL_COVERAGE: complete weather unavailable across all three same-season years"
+"geographies" = "ME;IT-CSUD"
+"implementation_status" = "IMPLEMENTED_BUT_BLOCKED_ANNUAL_WEATHER_COVERAGE"
+"catalog_model_id" = "V3_NOT_RUN_009"
+"frozen_json_pointer" = "/blocked_models/9"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "F1"
+"status" = "NOT_RUN"
+"reason" = "Incomplete annual native bilateral weather: ME,IT-CSUD,GR,IT-SUD,AT,IT-NORD"
+"weight_version" = "GY050_final"
+"evidence_status" = "DESCRIPTIVE_ONLY_WEAK_PREFIT_WEAK_SUPPORT"
+"implementation_status" = "NOT_IMPLEMENTED_ANNUAL_SYNTHETIC_WEATHER"
+"catalog_model_id" = "V3_NOT_RUN_010"
+"frozen_json_pointer" = "/blocked_models/10"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "F2"
+"status" = "NOT_RUN"
+"reason" = "Incomplete annual native bilateral weather: ME,IT-CSUD,GR,IT-SUD,AT,IT-NORD"
+"weight_version" = "GY050_final"
+"evidence_status" = "DESCRIPTIVE_ONLY_WEAK_PREFIT_WEAK_SUPPORT"
+"implementation_status" = "NOT_IMPLEMENTED_ANNUAL_SYNTHETIC_WEATHER"
+"catalog_model_id" = "V3_NOT_RUN_011"
+"frozen_json_pointer" = "/blocked_models/11"
+
+[[not_estimated]]
+"series" = "G_ME"
+"model" = "F1"
+"status" = "NOT_RUN"
+"reason" = "Incomplete annual native bilateral weather: ME,IT-CSUD,GR,IT-SUD,AT,IT-NORD"
+"weight_version" = "GY050_final"
+"evidence_status" = "DESCRIPTIVE_ONLY_WEAK_PREFIT_WEAK_SUPPORT"
+"implementation_status" = "NOT_IMPLEMENTED_ANNUAL_SYNTHETIC_WEATHER"
+"catalog_model_id" = "V3_NOT_RUN_012"
+"frozen_json_pointer" = "/blocked_models/12"
+
+[[not_estimated]]
+"series" = "AT_actual"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_013"
+"frozen_json_pointer" = "/blocked_models/13"
+
+[[not_estimated]]
+"series" = "CH_actual"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_014"
+"frozen_json_pointer" = "/blocked_models/14"
+
+[[not_estimated]]
+"series" = "SI_actual"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_015"
+"frozen_json_pointer" = "/blocked_models/15"
+
+[[not_estimated]]
+"series" = "GR_actual"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_016"
+"frozen_json_pointer" = "/blocked_models/16"
+
+[[not_estimated]]
+"series" = "ME_actual"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_017"
+"frozen_json_pointer" = "/blocked_models/17"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_018"
+"frozen_json_pointer" = "/blocked_models/18"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_019"
+"frozen_json_pointer" = "/blocked_models/19"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_020"
+"frozen_json_pointer" = "/blocked_models/20"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_021"
+"frozen_json_pointer" = "/blocked_models/21"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_022"
+"frozen_json_pointer" = "/blocked_models/22"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_023"
+"frozen_json_pointer" = "/blocked_models/23"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_024"
+"frozen_json_pointer" = "/blocked_models/24"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_025"
+"frozen_json_pointer" = "/blocked_models/25"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_026"
+"frozen_json_pointer" = "/blocked_models/26"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_027"
+"frozen_json_pointer" = "/blocked_models/27"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_028"
+"frozen_json_pointer" = "/blocked_models/28"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_029"
+"frozen_json_pointer" = "/blocked_models/29"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_030"
+"frozen_json_pointer" = "/blocked_models/30"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_031"
+"frozen_json_pointer" = "/blocked_models/31"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_032"
+"frozen_json_pointer" = "/blocked_models/32"
+
+[[not_estimated]]
+"series" = "ME_synthetic"
+"model" = "R1_placebo"
+"cutoff" = 2024
+"status" = "INSUFFICIENT_PRE_SUPPORT"
+"reason" = "No 2023 left-side observations; not fitted"
+"catalog_model_id" = "V3_NOT_RUN_033"
+"frozen_json_pointer" = "/blocked_models/33"
+
+[[not_estimated]]
+"series" = "G_ME"
+"model" = "F2"
+"status" = "NOT_RUN_UNSPECIFIED_GAP_SPREAD"
+"reason" = "A gap has no frozen unique native price index; no new spread regressor chosen. Native-donor Theta retained separately."
+"catalog_model_id" = "V3_NOT_RUN_034"
+"frozen_json_pointer" = "/blocked_models/34"

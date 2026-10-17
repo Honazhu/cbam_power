@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="610" viewBox="0 0 1100 610" role="img" aria-labelledby="title desc">
+  <title id="title">Frozen spatial weights and hourly weather semantics</title>
+  <desc id="desc">An invented polygon intersects a regular grid. A region's weather is the weighted sum of converted cell values, using frozen geodesic intersection-area weights. Wind speed is calculated separately in each cell before aggregation. Hour-ending accumulated radiation and precipitation shift one hour back to electricity delivery start; instantaneous variables do not shift.</desc>
+  <defs>
+    <clipPath id="gridClip"><rect x="52" y="140" width="320" height="320"/></clipPath>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#167d8d"/></marker>
+  </defs>
+  <rect width="1100" height="610" rx="14" fill="#f7f9fb"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="34" y="40" fill="#18354a" font-size="24" font-weight="700">Grid cells → regional controls → electricity delivery hours</text>
+    <text x="34" y="69" fill="#607583" font-size="16">Artificial geometry illustrating the frozen method; no empirical boundary or weight is displayed.</text>
+    <text x="52" y="114" fill="#18354a" font-size="20" font-weight="700">1. Match cells and frozen mask</text>
+    <rect x="52" y="140" width="320" height="320" fill="#fff" stroke="#93a8b8" stroke-width="1.4"/>
+    <path d="M89 390L101 232L167 175L263 191L335 292L298 401L191 427Z" fill="#b4dce0" stroke="#167d8d" stroke-width="2.5"/>
+    <g clip-path="url(#gridClip)" stroke="#93a8b8" stroke-width="1.2" fill="none">
+      <path d="M132 140V460M212 140V460M292 140V460M52 220H372M52 300H372M52 380H372"/>
+    </g>
+    <g fill="#37576f">
+      <circle cx="92" cy="180" r="3"/><circle cx="172" cy="180" r="3"/><circle cx="252" cy="180" r="3"/><circle cx="332" cy="180" r="3"/>
+      <circle cx="92" cy="260" r="3"/><circle cx="172" cy="260" r="3"/><circle cx="252" cy="260" r="3"/><circle cx="332" cy="260" r="3"/>
+      <circle cx="92" cy="340" r="3"/><circle cx="172" cy="340" r="3"/><circle cx="252" cy="340" r="3"/><circle cx="332" cy="340" r="3"/>
+      <circle cx="92" cy="420" r="3"/><circle cx="172" cy="420" r="3"/><circle cx="252" cy="420" r="3"/><circle cx="332" cy="420" r="3"/>
+    </g>
+    <rect x="143" y="308" width="58" height="26" rx="5" fill="#fff" fill-opacity="0.9"/>
+    <text x="172" y="327" fill="#155f6c" font-size="14" text-anchor="middle">cell i</text>
+    <text x="52" y="488" fill="#607583" font-size="15">Dots: grid centres · shading: cell–region overlap</text>
+    <text x="52" y="514" fill="#607583" font-size="15">Production grid: 0.25° · areas on WGS84</text>
+    <path d="M386 297H430" fill="none" stroke="#167d8d" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="450" y="140" width="598" height="185" rx="10" fill="#fff" stroke="#bdccd6" stroke-width="1.4"/>
+    <text x="470" y="114" fill="#18354a" font-size="20" font-weight="700">2. Convert each cell, then aggregate</text>
+    <text x="472" y="175" fill="#155f6c" font-size="20" font-weight="700">wᵢ = area(cellᵢ ∩ region) / total overlap area</text>
+    <text x="472" y="208" fill="#37576f" font-size="18">Regional weather = Σᵢ wᵢ × converted cell valueᵢ</text>
+    <line x1="472" y1="225" x2="1025" y2="225" stroke="#d5e0e6"/>
+    <text x="472" y="252" fill="#18354a" font-size="17" font-weight="700">Wind: √(uᵢ² + vᵢ²) before the weighted sum</text>
+    <text x="472" y="279" fill="#607583" font-size="16">Use frozen weights; retain strict cell completeness.</text>
+    <text x="472" y="303" fill="#607583" font-size="16">Missing cells propagate; weights are not renormalized.</text>
+    <text x="470" y="363" fill="#18354a" font-size="20" font-weight="700">3. Align the source variable's time meaning</text>
+    <rect x="450" y="383" width="598" height="157" rx="10" fill="#e4f2f2" stroke="#a0c9cc" stroke-width="1.4"/>
+    <text x="472" y="413" fill="#155f6c" font-size="17" font-weight="700">Accumulated radiation / precipitation</text>
+    <text x="472" y="447" fill="#18354a" font-size="18">01:00 UTC validity</text>
+    <path d="M665 441H737" fill="none" stroke="#167d8d" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <text x="701" y="431" text-anchor="middle" fill="#155f6c" font-size="14">−1 hour</text>
+    <text x="752" y="447" fill="#18354a" font-size="18">00:00 delivery start</text>
+    <text x="472" y="479" fill="#37576f" font-size="16">ssrd ÷ 3600 → W/m²       tp × 1000 → mm/hour</text>
+    <text x="472" y="515" fill="#37576f" font-size="16">Instantaneous temperature / wind: no time shift</text>
+    <text x="1048" y="582" text-anchor="end" fill="#7a8b96" font-size="14">Original educational schematic · artificial polygon</text>
+  </g>
+</svg>
